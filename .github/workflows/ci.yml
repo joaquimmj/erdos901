@@ -13,4 +13,4 @@ jobs:
       - run: make test
       - name: CEGAR sanity (must rediscover Fano, m(3)=7)
         run: |
-          python3 search/cegar.py --n 3 --v 7 --group none --record 8 --time 60 --out /tmp/r | tail -1 | grep '"edges": 7'
+          python3 search/cegar.py --n 3 --v 7 --group none --record 8 --time 60 --out /tmp/r | grep '"edges": 7'
