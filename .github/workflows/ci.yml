@@ -1,0 +1,16 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install numpy scipy
+      - run: make test
+      - name: CEGAR sanity (must rediscover Fano, m(3)=7)
+        run: |
+          python3 search/cegar.py --n 3 --v 7 --group none --record 8 --time 60 --out /tmp/r | tail -1 | grep '"edges": 7'

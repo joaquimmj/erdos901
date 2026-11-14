@@ -1,0 +1,4 @@
+verify/check2col
+__pycache__/
+*.pyc
+out/
