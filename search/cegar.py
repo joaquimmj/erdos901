@@ -23,6 +23,20 @@ from scipy.sparse import csr_matrix
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from hg import proper_coloring, write_edges
+import subprocess, tempfile
+ORACLE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "oracle")
+
+
+def many_colorings(edges, k):
+    """Up to k diverse proper 2-colourings (brute force helper, v <= 32)."""
+    with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
+        path = f.name
+    write_edges(edges, path)
+    try:
+        out = subprocess.run([ORACLE, path, str(k)], capture_output=True, text=True).stdout
+    finally:
+        os.unlink(path)
+    return [int(x) for x in out.split()]
 
 
 def orbits_of_nsets(v, n, group):
@@ -78,12 +92,16 @@ def main():
     ap.add_argument("--time", type=float, default=3000, help="seconds budget")
     ap.add_argument("--init", type=int, default=300, help="random initial colourings")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--per-iter", type=int, default=50,
+                    help="proper colourings added per CEGAR iteration")
     ap.add_argument("--iter-time", type=float, default=120,
                     help="max seconds per master ILP (incumbent used if not optimal)")
     ap.add_argument("--target", type=int, default=None,
                     help="only accept hypergraphs with <= target edges (default record-1)")
     ap.add_argument("--out", default="results")
     a = ap.parse_args()
+    if a.target is None and a.record < 10**9:
+        a.target = a.record - 1   # only look for record-breakers
     t0 = time.time()
     rng = np.random.default_rng(a.seed)
     n, v = a.n, a.v
@@ -135,22 +153,35 @@ def main():
                    integrality=np.ones(len(orbs)), bounds=Bounds(0, 1),
                    options={"time_limit": left, "disp": False})
         if res.x is None:
-            # infeasible with the target: proven no G-invariant hypergraph <= target
-            status = "infeasible_at_target" if res.status == 2 else "master_failed"; break
+            if res.status == 2:
+                # infeasible with the target: proven no G-invariant hypergraph <= target
+                status = "infeasible_at_target"; break
+            status = "master_no_incumbent"; continue  # time-limited, retry while budget remains
         chosen = [i for i in range(len(orbs)) if res.x[i] > 0.5]
         cost = int(sum(sizes[i] for i in chosen))
         lb = int(np.ceil(res.fun - 1e-6)) if res.status == 0 else None
         edges = [e for i in chosen for e in orbs[i]]
         last = {"last_master_cost": cost, "last_master_optimal": res.status == 0,
                 "lower_bound_this_v": cost if res.status == 0 else None}
-        c = proper_coloring(edges) if v <= 32 else pysat_oracle(edges, v)
+        if v <= 32:
+            cs = many_colorings(edges, a.per_iter)
+            c = cs[0] if cs else None
+        else:
+            c = pysat_oracle(edges, v); cs = [c] if c is not None else []
         if it % 10 == 0 or c is None:
             log(f"it={it} rows={len(rows)} master_cost={cost} optimal={res.status==0}")
         if c is None:
-            best = (cost, edges)
-            status = "optimal" if res.status == 0 else "feasible"
-            break
-        add_coloring(c)
+            if best is None or cost < best[0]:
+                best = (cost, edges)
+                log(f"non-2-colourable hypergraph with {cost} edges (optimal={res.status==0})")
+            if res.status == 0:
+                status = "optimal"; break
+            # incumbent only (time limit): demand something strictly cheaper and continue
+            a.target = cost - 1
+            status = "feasible"
+            continue
+        for cc in cs:
+            add_coloring(cc)
 
     os.makedirs(a.out, exist_ok=True)
     tag = f"n{n}_v{v}_{a.group}_s{a.seed}"

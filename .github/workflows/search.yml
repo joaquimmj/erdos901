@@ -68,6 +68,7 @@ jobs:
         with: { path: art }
       - run: pip install numpy scipy && make
       - name: tools for certification
+        continue-on-error: true
         run: |
           sudo apt-get update -qq && (sudo apt-get install -y -qq cadical || true)
           if ! command -v cadical; then
@@ -75,7 +76,8 @@ jobs:
             (cd /tmp/cadical && ./configure && make -j4) && sudo cp /tmp/cadical/build/cadical /usr/local/bin/
           fi
           git clone --depth 1 https://github.com/marijnheule/drat-trim /tmp/drat-trim
-          (cd /tmp/drat-trim && make) && sudo cp /tmp/drat-trim/drat-trim /usr/local/bin/
+          (cd /tmp/drat-trim && gcc -O2 -std=gnu11 -Wno-implicit-function-declaration drat-trim.c -o drat-trim) \
+            && sudo cp /tmp/drat-trim/drat-trim /usr/local/bin/ || echo "drat-trim build failed: brute-force certification only"
       - name: summarise + certify record-breakers
         run: |
           RUN=results/run_${{ github.run_id }}_n${{ inputs.n }}
