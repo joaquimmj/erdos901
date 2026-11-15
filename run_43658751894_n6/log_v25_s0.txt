@@ -1,0 +1,2 @@
+[    0.3s] n=6 v=25 group=cyclic orbits=7084 n-sets=177100
+[ 6962.8s] {"n": 6, "v": 25, "group": "cyclic", "seed": 0, "status": "master_no_incumbent", "iterations": 8, "constraints": 7500, "seconds": 6962.8, "record": 147}

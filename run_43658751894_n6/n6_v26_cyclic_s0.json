@@ -1,0 +1,14 @@
+{
+ "n": 6,
+ "v": 26,
+ "group": "cyclic",
+ "seed": 0,
+ "status": "master_no_incumbent",
+ "iterations": 8,
+ "constraints": 10751,
+ "seconds": 6995.7,
+ "record": 147,
+ "last_master_cost": 143,
+ "last_master_optimal": false,
+ "lower_bound_this_v": null
+}

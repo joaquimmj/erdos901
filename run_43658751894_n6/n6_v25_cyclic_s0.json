@@ -1,0 +1,11 @@
+{
+ "n": 6,
+ "v": 25,
+ "group": "cyclic",
+ "seed": 0,
+ "status": "master_no_incumbent",
+ "iterations": 8,
+ "constraints": 7500,
+ "seconds": 6962.8,
+ "record": 147
+}
