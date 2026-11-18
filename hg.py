@@ -77,3 +77,22 @@ def abbott_moser_product(A, B):
         for choice in product(B, repeat=len(ea)):
             out.append(frozenset(idx[(x, y)] for x, Bi in zip(ea, choice) for y in Bi))
     return out
+
+
+def abbott_hanson(H, n):
+    """m(n) <= 2^(n-1) + n*m(n-2) for odd n, from an (n-2)-uniform H.
+    New vertices a_1..a_n, b_1..b_n.  Edges: e + {a_i, b_i} for every edge e of
+    H and every i; and {a_i: i in I} + {b_j: j not in I} for every I of even size.
+    Non-2-colourable: H has a monochromatic edge, say red, so every pair
+    {a_i, b_i} has a blue vertex; pick one blue vertex per pair with an even
+    number of a's (possible if some pair is all blue); otherwise the pairs are
+    red/blue and the red transversal has even size because n is odd."""
+    assert n % 2 == 1 and all(len(e) == n - 2 for e in H)
+    v = max(map(max, H)) + 1
+    a = lambda i: v + i
+    b = lambda i: v + n + i
+    out = [frozenset(e | {a(i), b(i)}) for e in H for i in range(n)]
+    for k in range(0, n + 1, 2):
+        for I in combinations(range(n), k):
+            out.append(frozenset([a(i) for i in I] + [b(j) for j in range(n) if j not in I]))
+    return out

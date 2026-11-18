@@ -20,6 +20,10 @@ check("all 5-sets of 8 (v too small)", [frozenset(e) for e in combinations(range
 P = abbott_moser_product(triangle(), fano())
 assert len(P) == 147 and all(len(e) == 6 for e in P)
 check("Abbott-Moser 2x3 (m(6)<=147)", P, True)
+Q = abbott_hanson(fano(), 5)
+assert len(set(Q)) == 51 and all(len(e) == 5 for e in Q) and set(Q) == set(read_edges("constructions/aht51.txt"))
+check("Abbott-Hanson 5 from Fano (m(5)<=51)", Q, True)
+check("Abbott-Hanson minus an edge", Q[:-1], False)
 # S(5,6,12)-like sanity: a 6-set and its complement as the only edges -> 2-colourable
 check("two complementary 6-sets", [frozenset(range(6)), frozenset(range(6,12))], False)
 # groups: automorphisms of the 23-edge witness, and CEGAR with given groups
@@ -41,5 +45,12 @@ for n, v, g, want in [(3, 7, "fano_psl27", 7), (4, 11, "seymour_toft_144", 23), 
         r = json.load(open(f"{d}/n{n}_v{v}_{g}_s0.json"))
     assert r["status"] == "optimal" and r["edges"] == want, r
     print(f"ok  CEGAR n={n} v={v} group {g}: optimum {want}")
+# LNS must remove a redundant edge added to Fano
+with tempfile.TemporaryDirectory() as d:
+    write_edges(fano() + [frozenset({0, 1, 2})], d + "/h.txt")
+    subprocess.run([sys.executable, "search/lns.py", "--file", d + "/h.txt", "--wmin", "3", "--wmax", "5",
+                    "--time", "5", "--step-time", "10", "--out", d], check=True, capture_output=True)
+    assert proper_coloring(read_edges(d + "/lns_s0_E7.txt")) is None
+print("ok  LNS reduces Fano + 1 edge back to 7 edges")
 print("ALL TESTS PASSED")
 EOF

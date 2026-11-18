@@ -6,7 +6,9 @@ on:
     inputs:
       n:        { description: "uniformity n", default: "6" }
       v_list:   { description: "vertex counts, comma separated", default: "21,22,23,24" }
-      group:    { description: "cyclic | none", default: "cyclic" }
+      group:    { description: "cyclic | none (used when group_files is empty)", default: "cyclic" }
+      group_files: { description: "group JSON files, comma separated (e.g. groups/blocks_3_4d4.json)", default: "" }
+      state_from: { description: "run id to resume from (reuses its saved colourings)", default: "" }
       record:   { description: "current best known upper bound for m(n)", default: "147" }
       seeds:    { description: "seeds, comma separated", default: "0" }
       minutes:  { description: "minutes per job (max 340)", default: "45" }
@@ -14,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   plan:
@@ -27,7 +30,8 @@ jobs:
           import json
           vs = [int(x) for x in "${{ inputs.v_list }}".split(",") if x.strip()]
           ss = [int(x) for x in "${{ inputs.seeds }}".split(",") if x.strip()]
-          print("matrix=" + json.dumps({"v": vs, "seed": ss}))
+          gs = [x.strip() for x in "${{ inputs.group_files }}".split(",") if x.strip()] or [""]
+          print("matrix=" + json.dumps({"gf": gs, "v": vs, "seed": ss}))
           EOF
 
   run:
@@ -38,22 +42,30 @@ jobs:
       fail-fast: false
       max-parallel: 20
       matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    env:
+      NAME: res-n${{ inputs.n }}-v${{ matrix.v }}-s${{ matrix.seed }}-g${{ strategy.job-index }}
     steps:
       - uses: actions/checkout@v4
       - run: pip install numpy scipy python-sat
       - run: make
+      - name: resume state
+        if: inputs.state_from != ''
+        continue-on-error: true
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh run download ${{ inputs.state_from }} -n "$NAME" -D out
       - name: cegar
         run: |
           mkdir -p out
+          G="--group ${{ inputs.group }}"; [ -n "${{ matrix.gf }}" ] && G="--group-file ${{ matrix.gf }}"
           T=$(( ${{ inputs.minutes }} * 60 - 240 ))
           python3 search/cegar.py --n ${{ inputs.n }} --v ${{ matrix.v }} \
-            --group ${{ inputs.group }} --record ${{ inputs.record }} \
+            $G --state out/state.json --record ${{ inputs.record }} \
             --seed ${{ matrix.seed }} --time $T --iter-time ${{ inputs.iter_time }} \
             --out out | tee out/log_v${{ matrix.v }}_s${{ matrix.seed }}.txt || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: res-n${{ inputs.n }}-v${{ matrix.v }}-s${{ matrix.seed }}
+          name: ${{ env.NAME }}
           path: out/
           retention-days: 30
 
@@ -66,7 +78,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with: { path: art }
-      - run: pip install numpy scipy && make
+      - run: pip install numpy scipy python-sat && make
       - name: tools for certification
         continue-on-error: true
         run: |
@@ -82,15 +94,15 @@ jobs:
         run: |
           RUN=results/run_${{ github.run_id }}_n${{ inputs.n }}
           mkdir -p "$RUN"
-          find art -name '*.json' -exec cp {} "$RUN/" \;
+          find art -name 'n*.json' -exec cp {} "$RUN/" \;
           find art -name '*.txt' -exec cp {} "$RUN/" \;
           python3 - "$RUN" <<'EOF' | tee "$RUN/SUMMARY.md" >> "$GITHUB_STEP_SUMMARY"
           import json, glob, sys
           rows = [json.load(open(p)) for p in sorted(glob.glob(sys.argv[1] + "/*.json"))]
-          print(f"| v | seed | status | edges | beats record | last master cost | optimal |")
-          print("|---|---|---|---|---|---|---|")
+          print(f"| group | v | seed | status | edges | beats record | last master cost | optimal |")
+          print("|---|---|---|---|---|---|---|---|")
           for r in rows:
-              print(f"| {r['v']} | {r['seed']} | {r['status']} | {r.get('edges','')} | "
+              print(f"| {r['group']} | {r['v']} | {r['seed']} | {r['status']} | {r.get('edges','')} | "
                     f"{r.get('beats_record','')} | {r.get('last_master_cost','')} | {r.get('last_master_optimal','')} |")
           EOF
           for f in "$RUN"/n*_E*.txt; do

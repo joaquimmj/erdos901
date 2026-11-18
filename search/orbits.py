@@ -72,7 +72,8 @@ def elements(v, gens, cap=500):
 def automorphisms(edges, v):
     """All vertex permutations mapping the edge set to itself (backtracking)."""
     E = {frozenset(e) for e in edges}
-    by_max = [[e for e in E if max(e) == k] for k in range(v)]
+    at = [[e for e in E if k in e] for k in range(v)]
+    part = {frozenset(s) for e in E for r in range(len(e) + 1) for s in combinations(e, r)}
     out, img, used = [], [None] * v, [False] * v
 
     def rec(k):
@@ -83,7 +84,8 @@ def automorphisms(edges, v):
             if used[y]:
                 continue
             img[k] = y
-            if all(frozenset(img[x] for x in e) in E for e in by_max[k]):
+            # the image of the already-mapped part of each edge must lie inside an edge
+            if all(frozenset(img[x] for x in e if x <= k) in part for e in at[k]):
                 used[y] = True
                 rec(k + 1)
                 used[y] = False

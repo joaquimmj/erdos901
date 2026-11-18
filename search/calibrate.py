@@ -22,6 +22,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--n", type=int, default=4)
 ap.add_argument("--v", type=int, default=11)
 ap.add_argument("--time", type=float, default=300)
+ap.add_argument("--record", type=int, help="only look for hypergraphs with fewer edges than this")
 ap.add_argument("--jobs", type=int, default=os.cpu_count())
 ap.add_argument("--out", default="out/calib")
 a = ap.parse_args()
@@ -48,7 +49,7 @@ def run(job):
     name, order = job
     p = subprocess.run([sys.executable, os.path.join(os.path.dirname(__file__), "cegar.py"), "--n", str(a.n),
                     "--v", str(a.v), "--group-file", f"{a.out}/{name}.json", "--time", str(a.time),
-                    "--iter-time", str(a.time), "--out", a.out], capture_output=True, text=True)
+                    "--iter-time", str(a.time), "--out", a.out] + (["--record", str(a.record)] if a.record else []), capture_output=True, text=True)
     assert p.returncode == 0, name + ": " + p.stderr[-500:]
     r = json.load(open(f"{a.out}/n{a.n}_v{a.v}_{name}_s0.json"))
     print(f"| `{name}` | {order} | {r['status']} | {r.get('edges', '')} | "

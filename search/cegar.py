@@ -23,7 +23,7 @@ from scipy.optimize import milp, LinearConstraint, Bounds
 from scipy.sparse import csr_matrix
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from hg import proper_coloring, write_edges
+from hg import proper_coloring, write_edges, read_edges
 from orbits import load_group, builtin, orbits, elements
 import subprocess, tempfile
 ORACLE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "oracle")
@@ -63,6 +63,8 @@ def main():
     ap.add_argument("--v", type=int, required=True)
     ap.add_argument("--group", default="cyclic", choices=["cyclic", "none"])
     ap.add_argument("--group-file", help="JSON group (see search/orbits.py); overrides --group")
+    ap.add_argument("--fixed", help="edge file: these edges are always present (large-neighbourhood search)")
+    ap.add_argument("--touch", help="comma-separated vertices: only n-sets meeting them may be added")
     ap.add_argument("--state", help="JSON file of colourings seen: loaded at start, saved as we go")
     ap.add_argument("--record", type=int, default=10**9, help="known upper bound")
     ap.add_argument("--time", type=float, default=3000, help="seconds budget")
@@ -89,6 +91,12 @@ def main():
         gens = builtin(a.group, v)
     orbs = orbits(v, n, gens)
     group = elements(v, gens)
+    fixed = [tuple(sorted(e)) for e in read_edges(a.fixed)] if a.fixed else []
+    fm = masks(fixed)
+    if a.touch or fixed:   # fixed edges and the touch set must be invariant under the group (trivially so for "none")
+        W = {int(x) for x in a.touch.split(",")} if a.touch else set(range(v))
+        fs = set(fixed)
+        orbs = [o for o in orbs if all(W & set(e) and e not in fs for e in o)]
     sizes = np.array([len(o) for o in orbs], dtype=float)
     em = [masks(o) for o in orbs]
     allm = np.concatenate(em)
@@ -96,6 +104,7 @@ def main():
     log = lambda *x: print(f"[{time.time()-t0:7.1f}s]", *x, flush=True)
     log(f"n={n} v={v} group={a.group} orbits={len(orbs)} n-sets={len(allm)}")
 
+    dead = [False]
     rows = []          # list of arrays of orbit indices hit by each colouring
     seen = set()
 
@@ -106,11 +115,14 @@ def main():
             if r in seen or ((1 << v) - 1 - r) in seen:
                 continue
             seen.add(r)
+            if len(fm) and (((fm & np.uint64(r)) == 0) | ((fm & np.uint64(r)) == fm)).any():
+                continue  # already killed by a fixed edge
             x = allm & np.uint64(r)
             mono = (x == 0) | (x == allm)
             hit = np.unique(owner[mono])
             if len(hit) == 0:
-                return False  # no n-set mono: impossible to kill (v too small)
+                dead[0] = True
+                return False  # no available n-set is monochromatic: impossible to kill
             rows.append(hit)
         return True
 
@@ -128,13 +140,20 @@ def main():
         k = v // 2 + int(rng.integers(0, 2))
         S = rng.choice(v, size=k, replace=False)
         if not add_coloring(int(sum(1 << int(s) for s in S))):
-            log("v too small: a colouring has no monochromatic n-set"); return
+            log("a colouring has no available monochromatic n-set"); break
     best = None
     last = {}
     it = 0
     status = "timeout"
-    while time.time() - t0 < a.time:
+    while time.time() - t0 < a.time and not dead[0]:
         it += 1
+        if not rows:   # no constraint yet: start from colourings the fixed edges leave proper
+            cs = many_colorings(fixed, a.per_iter) if fixed else [(1 << (v // 2)) - 1]
+            if not cs:   # only reachable with fixed edges
+                status = "fixed_edges_suffice"; best = (len(fixed), fixed); break
+            for cc in cs:
+                add_coloring(cc)
+            continue
         data = np.concatenate([np.ones(len(h)) for h in rows])
         ri = np.concatenate([np.full(len(h), i) for i, h in enumerate(rows)])
         ci = np.concatenate(rows)
@@ -154,7 +173,7 @@ def main():
         chosen = [i for i in range(len(orbs)) if res.x[i] > 0.5]
         cost = int(sum(sizes[i] for i in chosen))
         lb = int(np.ceil(res.fun - 1e-6)) if res.status == 0 else None
-        edges = [e for i in chosen for e in orbs[i]]
+        edges = fixed + [e for i in chosen for e in orbs[i]]
         last = {"last_master_cost": cost, "last_master_optimal": res.status == 0,
                 "lower_bound_this_v": cost if res.status == 0 else None}
         if v <= 32:
@@ -165,8 +184,8 @@ def main():
         if it % 10 == 0 or c is None:
             log(f"it={it} rows={len(rows)} master_cost={cost} optimal={res.status==0}")
         if c is None:
-            if best is None or cost < best[0]:
-                best = (cost, edges)
+            if best is None or len(edges) < best[0]:
+                best = (len(edges), edges)
                 log(f"non-2-colourable hypergraph with {cost} edges (optimal={res.status==0})")
             if res.status == 0:
                 status = "optimal"; break
@@ -185,6 +204,8 @@ def main():
     rep = {"n": n, "v": v, "group": a.group, "seed": a.seed, "status": status,
            "iterations": it, "constraints": len(rows), "seconds": round(time.time() - t0, 1),
            "record": a.record, **last}
+    if dead[0]:
+        rep["status"] = "infeasible_at_target"   # some colouring cannot be killed at all
     if best:
         rep["edges"] = best[0]
         rep["beats_record"] = best[0] < a.record
