@@ -9,8 +9,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - run: pip install numpy scipy
+      - run: pip install numpy scipy python-sat
       - run: make test
+      - run: python3 verify/check_pysat.py constructions/seymour_toft.txt
       - name: CEGAR sanity (must rediscover Fano, m(3)=7)
         run: |
           python3 search/cegar.py --n 3 --v 7 --group none --record 8 --time 60 --out /tmp/r | grep '"edges": 7'

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """CEGAR search for the cheapest G-invariant non-2-colourable n-uniform
-hypergraph on v vertices (G = Z_v cyclic, or trivial group).
+hypergraph on v vertices (G = Z_v cyclic, trivial, or any group from a JSON
+file of generators, see search/orbits.py).
 
 Master: 0/1 ILP (scipy.optimize.milp / HiGHS) choosing G-orbits of n-sets,
         minimising the number of edges, subject to: every colouring seen so
@@ -23,6 +24,7 @@ from scipy.sparse import csr_matrix
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from hg import proper_coloring, write_edges
+from orbits import load_group, builtin, orbits, elements
 import subprocess, tempfile
 ORACLE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "oracle")
 
@@ -39,36 +41,8 @@ def many_colorings(edges, k):
     return [int(x) for x in out.split()]
 
 
-def orbits_of_nsets(v, n, group):
-    seen = {}
-    reps = []
-    for e in combinations(range(v), n):
-        if e in seen:
-            continue
-        if group == "cyclic":
-            orb = {tuple(sorted((x + s) % v for x in e)) for s in range(v)}
-        else:
-            orb = {e}
-        k = len(reps)
-        for o in orb:
-            seen[o] = k
-        reps.append(sorted(orb))
-    return reps
-
-
 def masks(edges):
     return np.array([sum(1 << x for x in e) for e in edges], dtype=np.uint64)
-
-
-def rotations(c, v, group):
-    if group != "cyclic":
-        return [c]
-    full = (1 << v) - 1
-    out = set()
-    for s in range(v):
-        r = ((c << s) | (c >> (v - s))) & full
-        out.add(r)
-    return list(out)
 
 
 def pysat_oracle(edges, v):
@@ -88,6 +62,8 @@ def main():
     ap.add_argument("--n", type=int, required=True)
     ap.add_argument("--v", type=int, required=True)
     ap.add_argument("--group", default="cyclic", choices=["cyclic", "none"])
+    ap.add_argument("--group-file", help="JSON group (see search/orbits.py); overrides --group")
+    ap.add_argument("--state", help="JSON file of colourings seen: loaded at start, saved as we go")
     ap.add_argument("--record", type=int, default=10**9, help="known upper bound")
     ap.add_argument("--time", type=float, default=3000, help="seconds budget")
     ap.add_argument("--init", type=int, default=300, help="random initial colourings")
@@ -105,7 +81,14 @@ def main():
     t0 = time.time()
     rng = np.random.default_rng(a.seed)
     n, v = a.n, a.v
-    orbs = orbits_of_nsets(v, n, a.group)
+    if a.group_file:
+        gv, gens = load_group(a.group_file)
+        assert gv == v, f"group file is on {gv} vertices, not {v}"
+        a.group = os.path.splitext(os.path.basename(a.group_file))[0]
+    else:
+        gens = builtin(a.group, v)
+    orbs = orbits(v, n, gens)
+    group = elements(v, gens)
     sizes = np.array([len(o) for o in orbs], dtype=float)
     em = [masks(o) for o in orbs]
     allm = np.concatenate(em)
@@ -117,7 +100,9 @@ def main():
     seen = set()
 
     def add_coloring(c):
-        for r in rotations(c, v, a.group):
+        bits = [i for i in range(v) if c >> i & 1]
+        for g in group:
+            r = sum(1 << g[i] for i in bits)
             if r in seen or ((1 << v) - 1 - r) in seen:
                 continue
             seen.add(r)
@@ -129,6 +114,15 @@ def main():
             rows.append(hit)
         return True
 
+    def save_state():
+        if a.state:
+            json.dump(sorted(seen), open(a.state + ".tmp", "w"))
+            os.replace(a.state + ".tmp", a.state)
+
+    if a.state and os.path.exists(a.state):
+        for c in json.load(open(a.state)):
+            add_coloring(c)
+        log(f"resumed {len(rows)} colourings from {a.state}")
     # balanced random initial colourings (the hardest ones)
     for _ in range(a.init):
         k = v // 2 + int(rng.integers(0, 2))
@@ -182,6 +176,9 @@ def main():
             continue
         for cc in cs:
             add_coloring(cc)
+        if it % 10 == 0:
+            save_state()
+    save_state()
 
     os.makedirs(a.out, exist_ok=True)
     tag = f"n{n}_v{v}_{a.group}_s{a.seed}"

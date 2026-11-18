@@ -22,5 +22,24 @@ assert len(P) == 147 and all(len(e) == 6 for e in P)
 check("Abbott-Moser 2x3 (m(6)<=147)", P, True)
 # S(5,6,12)-like sanity: a 6-set and its complement as the only edges -> 2-colourable
 check("two complementary 6-sets", [frozenset(range(6)), frozenset(range(6,12))], False)
+# groups: automorphisms of the 23-edge witness, and CEGAR with given groups
+import json, subprocess, tempfile
+sys.path.insert(0, "search")
+from orbits import automorphisms, load_group, elements
+ST = read_edges("constructions/seymour_toft.txt")
+check("Seymour-Toft (m(4)=23)", ST, True)
+A = automorphisms(ST, 11)
+assert len(A) == 144
+assert sorted({tuple(sorted({g[x] for g in A})) for x in range(11)}) == [(0,1,2,3), (4,5,6), (7,8,9,10)]
+assert set(elements(*load_group("groups/seymour_toft_144.json"))) == set(A)
+assert len(elements(*load_group("groups/fano_psl27.json"))) == 168
+print("ok  Aut(Seymour-Toft) has order 144, orbits 4+3+4")
+for n, v, g, want in [(3, 7, "fano_psl27", 7), (4, 11, "seymour_toft_144", 23), (4, 11, "blocks_3_4d4", 23)]:
+    with tempfile.TemporaryDirectory() as d:
+        subprocess.run([sys.executable, "search/cegar.py", "--n", str(n), "--v", str(v), "--group-file",
+                        f"groups/{g}.json", "--time", "120", "--out", d], check=True, capture_output=True)
+        r = json.load(open(f"{d}/n{n}_v{v}_{g}_s0.json"))
+    assert r["status"] == "optimal" and r["edges"] == want, r
+    print(f"ok  CEGAR n={n} v={v} group {g}: optimum {want}")
 print("ALL TESTS PASSED")
 EOF

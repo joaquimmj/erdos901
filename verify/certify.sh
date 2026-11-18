@@ -2,6 +2,7 @@
 # Certify that edges.txt is a non-2-colourable uniform hypergraph.
 #   1. brute force (verify/check2col)          -- independent C code
 #   2. SAT: CNF -> cadical (DRAT proof) -> drat-trim
+#   3. shape checks + Glucose with another encoding (verify/check_pysat.py)
 # Usage: verify/certify.sh path/to/edges.txt  [outdir]
 set -euo pipefail
 H="$1"; OUT="${2:-$(dirname "$H")/cert_$(basename "$H" .txt)}"
@@ -22,5 +23,8 @@ else
   echo "cadical/drat-trim not installed: SAT step skipped (CI installs them)"
   SKIP=1
 fi
+echo "== 3. shape + Glucose"
+python3 "$HERE/check_pysat.py" "$OUT/edges.txt" | tee "$OUT/pysat.log"
+grep -q NON-2-COLORABLE "$OUT/pysat.log"
 ( cd "$OUT" && sha256sum edges.txt H.cnf > SHA256SUMS )
-if [ "${SKIP:-0}" = 1 ]; then echo "PARTIAL (brute force only): $OUT"; else echo "CERTIFIED (brute force + DRAT): $OUT"; fi
+if [ "${SKIP:-0}" = 1 ]; then echo "PARTIAL (no DRAT): $OUT"; else echo "CERTIFIED (brute force + DRAT + Glucose): $OUT"; fi
