@@ -156,8 +156,9 @@ la non-2-colorabilité est vérifiée par calcul.
 | v = 11 à 14, groupes à blocs et variantes diagonales (220 groupes) | tous infaisables sous 51 |
 
 Ces « infaisable » sont des preuves (le maître ILP est infaisable), mais elles sont peu informatives : avec un
-groupe d'ordre 35 ou plus, presque toutes les orbites d'arêtes ont au moins 35 éléments, et on ne peut pas en
-combiner deux sous 51. **Pour n = 5, il faut des groupes d'ordre au plus une dizaine, ou pas de groupe du tout.**
+gros groupe, la plupart des orbites d'arêtes ont des dizaines d'éléments, et on ne peut guère en
+combiner sous 51 (c'est mon interprétation ; les tailles d'orbites n'ont pas été tabulées). **Pour n = 5, il faut
+sans doute des groupes d'ordre au plus une dizaine, ou pas de groupe du tout.**
 C'est la différence avec n = 4, où 23 arêtes se répartissent en orbites de 1, 4, 6 et 12.
 
 ## m(5, v) exact
@@ -179,5 +180,5 @@ C'est la différence avec n = 4, où 23 arêtes se répartissent en orbites de 1
 ## Non fait
 
 - `search/exact_mnv.py` avec cassage de symétrie et preuve DRAT d'infaisabilité à k − 1 arêtes.
-- AGL(1, p) et PSL(2, q) : leurs orbites sont trop grosses pour une cible de 50 arêtes, même raison que ci-dessus.
+- AGL(1, p) et PSL(2, q) : non testés. Le même problème de taille d'orbites est à craindre.
 - Revue de littérature arXiv 2024–2026.
