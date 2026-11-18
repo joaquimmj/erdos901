@@ -118,3 +118,66 @@ Les certificats sont dans `results/calibrage_n4/`.
   ou plus.
 - Le workflow GitHub Actions `search.yml` ne prend pas encore de fichier de groupe.
 - La mise à jour OEIS (piste 0) n'est pas faite.
+
+---
+
+# Suite — attaque de m(5) ≤ 51 (état au 18 novembre 2026)
+
+## En bref
+
+- Le 51 d'Abbott–Hanson est reproduit et **il est arête-critique** : pas de gain par simple suppression.
+- **Aucune construction sous 51 n'a été trouvée.**
+- Les groupes à blocs qui marchent pour n = 4 ne donnent rien pour n = 5 sur 11 à 14 sommets, mais pour une
+  raison presque arithmétique : leurs orbites d'arêtes sont trop grosses pour tenir sous 51.
+- m(5, 10) = 126.
+
+## Le 51
+
+Construction (`hg.abbott_hanson`, fichier `constructions/aht51.txt`) : les 7 sommets de Fano, plus 5 paires
+(aᵢ, bᵢ). Arêtes : chaque droite de Fano avec chaque paire (35 arêtes), et les 16 transversales des paires qui
+prennent un nombre pair de aᵢ. La description est reconstruite à partir de la preuve, pas recopiée d'Aglave et al. ;
+la non-2-colorabilité est vérifiée par calcul.
+
+| Propriété | Valeur |
+|---|---|
+| Sommets, arêtes | 17, 51 |
+| 2-coloriable | non |
+| Arête-critique | oui (51 arêtes sur 51) |
+| Automorphismes | 322 560 = 168 × 1 920 |
+| Orbites de sommets | les 7 de Fano ; les 10 des paires |
+| Orbites d'arêtes | 35 et 16 |
+
+## Recherches n = 5, cible ≤ 50 arêtes
+
+| Recherche | Résultat |
+|---|---|
+| v = 17, groupe complet du 51 | optimum 51 : rien de mieux avec toute cette symétrie |
+| v = 17, 24 sous-groupes du groupe du 51 (ordres 35 à 322 560) | tous infaisables sous 51 |
+| v = 11 à 14, groupes à blocs et variantes diagonales (220 groupes) | tous infaisables sous 51 |
+
+Ces « infaisable » sont des preuves (le maître ILP est infaisable), mais elles sont peu informatives : avec un
+groupe d'ordre 35 ou plus, presque toutes les orbites d'arêtes ont au moins 35 éléments, et on ne peut pas en
+combiner deux sous 51. **Pour n = 5, il faut des groupes d'ordre au plus une dizaine, ou pas de groupe du tout.**
+C'est la différence avec n = 4, où 23 arêtes se répartissent en orbites de 1, 4, 6 et 12.
+
+## m(5, v) exact
+
+- **m(5, 10) = 126.** Borne inférieure : chacune des 126 bipartitions 5 + 5 impose de prendre une de ses deux
+  moitiés. Borne supérieure : hypergraphe à 126 arêtes trouvé par CEGAR sans symétrie, certifié par les trois
+  contrôles (`results/m5_v10/`). À vérifier dans la littérature avant d'en parler : c'est probablement connu.
+- m(5, 11) : pas de convergence en 4 minutes sans cassage de symétrie (dernier coût du maître 63, non optimal).
+
+## Outils ajoutés
+
+- `search/cegar.py` : `--fixed` (arêtes imposées) et `--touch` (nouvelles arêtes limitées à celles qui touchent
+  des sommets donnés).
+- `search/lns.py` : recherche locale à grand voisinage. On libère les arêtes qui touchent 2 à 4 sommets tirés au
+  hasard, et CEGAR cherche un remplacement strictement plus petit.
+- `search.yml` : entrées `group_files` (liste de fichiers de groupe) et `state_from` (reprise d'un lancement).
+  **Non testé sur GitHub.**
+
+## Non fait
+
+- `search/exact_mnv.py` avec cassage de symétrie et preuve DRAT d'infaisabilité à k − 1 arêtes.
+- AGL(1, p) et PSL(2, q) : leurs orbites sont trop grosses pour une cible de 50 arêtes, même raison que ci-dessus.
+- Revue de littérature arXiv 2024–2026.
