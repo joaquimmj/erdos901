@@ -155,18 +155,30 @@ la non-2-colorabilité est vérifiée par calcul.
 | v = 17, 24 sous-groupes du groupe du 51 (ordres 35 à 322 560) | tous infaisables sous 51 |
 | v = 11 à 14, groupes à blocs et variantes diagonales (220 groupes) | tous infaisables sous 51 |
 
-Ces « infaisable » sont des preuves (le maître ILP est infaisable), mais elles sont peu informatives : avec un
-gros groupe, la plupart des orbites d'arêtes ont des dizaines d'éléments, et on ne peut guère en
-combiner sous 51 (c'est mon interprétation ; les tailles d'orbites n'ont pas été tabulées). **Pour n = 5, il faut
-sans doute des groupes d'ordre au plus une dizaine, ou pas de groupe du tout.**
-C'est la différence avec n = 4, où 23 arêtes se répartissent en orbites de 1, 4, 6 et 12.
+Ces « infaisable » sont des preuves : le maître ILP est infaisable, donc aucun hypergraphe invariant sous le
+groupe n'a 50 arêtes ou moins. Elles ne sont pas triviales pour tous les groupes. Tailles d'orbites des
+5-sous-ensembles, sur un échantillon :
+
+| groupe | orbites | taille médiane | orbites de taille ≤ 50 |
+|---|---|---|---|
+| groupe complet du 51 (v = 17) | 16 | 160 | 4 |
+| Z₇ × Z₅ dans le groupe du 51 | 224 | 35 | 224 |
+| groupe des paires seul, ordre 1 920 | 193 | 10 | 156 |
+| `blocks_3_3_4d4` (v = 14) | 66 | 18 | 54 |
+| `blocks_2_4d4d4` (v = 14) | 119 | 12 | 119 |
+
+Pour les groupes à blocs, beaucoup de petites orbites étaient disponibles et le résultat reste négatif. **La
+famille qui retrouve 23 pour n = 4 ne se transpose donc pas telle quelle à n = 5 sur 11 à 14 sommets.**
 
 ## m(5, v) exact
 
 - **m(5, 10) = 126.** Borne inférieure : chacune des 126 bipartitions 5 + 5 impose de prendre une de ses deux
   moitiés. Borne supérieure : hypergraphe à 126 arêtes trouvé par CEGAR sans symétrie, certifié par les trois
-  contrôles (`results/m5_v10/`). À vérifier dans la littérature avant d'en parler : c'est probablement connu.
+  contrôles (`results/m5_v10/`). Grill–Linzmayer ne donnent pas cette valeur, mais l'argument est élémentaire :
+  ne pas la présenter comme nouvelle sans vérifier.
 - m(5, 11) : pas de convergence en 4 minutes sans cassage de symétrie (dernier coût du maître 63, non optimal).
+  La valeur est de toute façon connue d'après de Vries : la borne C₆/2 = 66 est atteinte exactement quand un
+  système de Steiner existe, et S(4, 5, 11) existe. Donc m(5, 11) = 66 (déduction de ma part, non recalculée).
 
 ## Outils ajoutés
 
@@ -180,5 +192,15 @@ C'est la différence avec n = 4, où 23 arêtes se répartissent en orbites de 1
 ## Non fait
 
 - `search/exact_mnv.py` avec cassage de symétrie et preuve DRAT d'infaisabilité à k − 1 arêtes.
-- AGL(1, p) et PSL(2, q) : non testés. Le même problème de taille d'orbites est à craindre.
-- Revue de littérature arXiv 2024–2026.
+- AGL(1, p) et PSL(2, q) : non testés.
+- Groupes à blocs pour v = 15 à 25 : non lancés.
+
+## Littérature (recherche du 18 novembre 2026)
+
+- Grill–Linzmayer, arXiv:2403.05674 v3, Théorème 1 : m(5) ≥ 32, m(6) ≥ 64, m(7) ≥ 128, m(8) ≥ 263, m(9) ≥ 538.
+  Les chiffres du plan sont confirmés. Leur tableau donne toujours 51 et 147 comme meilleures bornes supérieures.
+- Aucun article trouvé qui améliore m(5) ≤ 51 ou m(6) ≤ 147.
+- **À vérifier :** une fiche ResearchGate récente s'intitule « A new lower bound for property B: m(5) ≥ 33 ».
+  La page n'a pas pu être lue d'ici (auteurs, date et contenu inconnus). Si c'est confirmé, la mise à jour OEIS
+  doit citer 33 et non 32.
+- La recherche s'est limitée à deux requêtes web : ce n'est pas une revue complète.
