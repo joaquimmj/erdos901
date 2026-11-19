@@ -1295,3 +1295,10 @@
 [218s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1) proved=True
 [221s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 1) proved=True
 [225s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1) proved=True
+[231s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1) proved=True
+[231s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2) proved=True
+[231s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 1) proved=True
+[231s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 2, 2, 2, 1, 1) proved=True
+[235s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1) proved=True
+[242s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1) proved=True
+[249s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1) proved=True
