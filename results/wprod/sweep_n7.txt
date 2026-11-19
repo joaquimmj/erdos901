@@ -1,0 +1,8 @@
+[0s] n=7: all multisets of 3 weights done, best 421, unresolved 0
+[0s] n=7: all multisets of 4 weights done, best 421, unresolved 0
+[0s] n=7: all multisets of 5 weights done, best 421, unresolved 0
+[0s] n=7: all multisets of 6 weights done, best 421, unresolved 0
+[1s] n=7: all multisets of 7 weights done, best 421, unresolved 0
+[5s] n=7: all multisets of 8 weights done, best 421, unresolved 0
+[18s] n=7: all multisets of 9 weights done, best 421, unresolved 0
+[70s] n=7: all multisets of 10 weights done, best 421, unresolved 0

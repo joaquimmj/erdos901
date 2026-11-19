@@ -9,3 +9,4 @@
 [   84.5s] it=322341 proper colourings: 7472
 [   94.8s] it=361597 proper colourings: 7414
 [  274.7s] it=1058096 proper colourings: 7226
+no success: best had 7226 proper colourings after 5039980 moves

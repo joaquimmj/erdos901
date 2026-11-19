@@ -1,0 +1,222 @@
+[0s] n=9: all multisets of 3 weights done, best 2401, unresolved 0
+[0s] n=9: all multisets of 4 weights done, best 2401, unresolved 0
+[0s] n=9: all multisets of 5 weights done, best 2401, unresolved 0
+[1s] n=9: all multisets of 6 weights done, best 2401, unresolved 0
+[2s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3) proved=True
+[3s] n=9: all multisets of 7 weights done, best 2401, unresolved 0
+[5s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3) proved=True
+[7s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[9s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[10s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[10s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[10s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[10s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[10s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[11s] n=9: all multisets of 8 weights done, best 2401, unresolved 0
+[13s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3) proved=True
+[15s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[18s] n=9 cost 2401 (ties; known 2401) weights (8, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[19s] n=9 cost 2401 (ties; known 2401) weights (8, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[19s] n=9 cost 2401 (ties; known 2401) weights (8, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[19s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[19s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[19s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[21s] n=9 cost 2401 (ties; known 2401) weights (7, 7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[24s] n=9 cost 2401 (ties; known 2401) weights (7, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[25s] n=9 cost 2401 (ties; known 2401) weights (7, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[25s] n=9 cost 2401 (ties; known 2401) weights (7, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[26s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[26s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[26s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[28s] n=9 cost 2401 (ties; known 2401) weights (6, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[30s] n=9 cost 2401 (ties; known 2401) weights (6, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[31s] n=9 cost 2401 (ties; known 2401) weights (6, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[31s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[31s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[31s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[33s] n=9 cost 2401 (ties; known 2401) weights (5, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[34s] n=9 cost 2401 (ties; known 2401) weights (5, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[34s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[34s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[34s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[35s] n=9 cost 2401 (ties; known 2401) weights (4, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[36s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[36s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[36s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[37s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[37s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[37s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[37s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 2, 2) proved=True
+[37s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 2, 1) proved=True
+[37s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 1, 1) proved=True
+[37s] n=9: all multisets of 9 weights done, best 2401, unresolved 0
+[40s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 3, 3, 3, 3, 3, 3, 3) proved=True
+[42s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[44s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[45s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[46s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[46s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[46s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[46s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[48s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[51s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[52s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[53s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[53s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[53s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[53s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[56s] n=9 cost 2401 (ties; known 2401) weights (8, 6, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[59s] n=9 cost 2401 (ties; known 2401) weights (8, 6, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[60s] n=9 cost 2401 (ties; known 2401) weights (8, 6, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[60s] n=9 cost 2401 (ties; known 2401) weights (8, 6, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[60s] n=9 cost 2401 (ties; known 2401) weights (8, 6, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[60s] n=9 cost 2401 (ties; known 2401) weights (8, 6, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[63s] n=9 cost 2401 (ties; known 2401) weights (8, 5, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[65s] n=9 cost 2401 (ties; known 2401) weights (8, 5, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[65s] n=9 cost 2401 (ties; known 2401) weights (8, 5, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[65s] n=9 cost 2401 (ties; known 2401) weights (8, 5, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[66s] n=9 cost 2401 (ties; known 2401) weights (8, 5, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[67s] n=9 cost 2401 (ties; known 2401) weights (8, 4, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[67s] n=9 cost 2401 (ties; known 2401) weights (8, 4, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[67s] n=9 cost 2401 (ties; known 2401) weights (8, 4, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[67s] n=9 cost 2401 (ties; known 2401) weights (8, 4, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[68s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[68s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[68s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[68s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 2, 2) proved=True
+[68s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 2, 1) proved=True
+[68s] n=9 cost 2401 (ties; known 2401) weights (8, 3, 3, 3, 3, 3, 3, 3, 1, 1) proved=True
+[71s] n=9 cost 2401 (ties; known 2401) weights (7, 7, 7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[74s] n=9 cost 2401 (ties; known 2401) weights (7, 7, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[75s] n=9 cost 2401 (ties; known 2401) weights (7, 7, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[76s] n=9 cost 2401 (ties; known 2401) weights (7, 7, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[76s] n=9 cost 2401 (ties; known 2401) weights (7, 7, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[76s] n=9 cost 2401 (ties; known 2401) weights (7, 7, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[76s] n=9 cost 2401 (ties; known 2401) weights (7, 7, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[80s] n=9 cost 2401 (ties; known 2401) weights (7, 6, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[82s] n=9 cost 2401 (ties; known 2401) weights (7, 6, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[84s] n=9 cost 2401 (ties; known 2401) weights (7, 6, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[84s] n=9 cost 2401 (ties; known 2401) weights (7, 6, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[85s] n=9 cost 2401 (ties; known 2401) weights (7, 6, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[85s] n=9 cost 2401 (ties; known 2401) weights (7, 6, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[87s] n=9 cost 2401 (ties; known 2401) weights (7, 5, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[89s] n=9 cost 2401 (ties; known 2401) weights (7, 5, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[90s] n=9 cost 2401 (ties; known 2401) weights (7, 5, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[90s] n=9 cost 2401 (ties; known 2401) weights (7, 5, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[90s] n=9 cost 2401 (ties; known 2401) weights (7, 5, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[92s] n=9 cost 2401 (ties; known 2401) weights (7, 4, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[92s] n=9 cost 2401 (ties; known 2401) weights (7, 4, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[92s] n=9 cost 2401 (ties; known 2401) weights (7, 4, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[92s] n=9 cost 2401 (ties; known 2401) weights (7, 4, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[93s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[93s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[93s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[94s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 2, 2) proved=True
+[94s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 2, 1) proved=True
+[94s] n=9 cost 2401 (ties; known 2401) weights (7, 3, 3, 3, 3, 3, 3, 3, 1, 1) proved=True
+[98s] n=9 cost 2401 (ties; known 2401) weights (6, 6, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[101s] n=9 cost 2401 (ties; known 2401) weights (6, 6, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[103s] n=9 cost 2401 (ties; known 2401) weights (6, 6, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[104s] n=9 cost 2401 (ties; known 2401) weights (6, 6, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[104s] n=9 cost 2401 (ties; known 2401) weights (6, 6, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[104s] n=9 cost 2401 (ties; known 2401) weights (6, 6, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[109s] n=9 cost 2401 (ties; known 2401) weights (6, 5, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[111s] n=9 cost 2401 (ties; known 2401) weights (6, 5, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[112s] n=9 cost 2401 (ties; known 2401) weights (6, 5, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[112s] n=9 cost 2401 (ties; known 2401) weights (6, 5, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[112s] n=9 cost 2401 (ties; known 2401) weights (6, 5, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[114s] n=9 cost 2401 (ties; known 2401) weights (6, 4, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[116s] n=9 cost 2401 (ties; known 2401) weights (6, 4, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[116s] n=9 cost 2401 (ties; known 2401) weights (6, 4, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[116s] n=9 cost 2401 (ties; known 2401) weights (6, 4, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[117s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[117s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[117s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[118s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 2, 2) proved=True
+[118s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 2, 1) proved=True
+[118s] n=9 cost 2401 (ties; known 2401) weights (6, 3, 3, 3, 3, 3, 3, 3, 1, 1) proved=True
+[121s] n=9 cost 2401 (ties; known 2401) weights (5, 5, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[123s] n=9 cost 2401 (ties; known 2401) weights (5, 5, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[125s] n=9 cost 2401 (ties; known 2401) weights (5, 5, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[125s] n=9 cost 2401 (ties; known 2401) weights (5, 5, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[125s] n=9 cost 2401 (ties; known 2401) weights (5, 5, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[128s] n=9 cost 2401 (ties; known 2401) weights (5, 4, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[129s] n=9 cost 2401 (ties; known 2401) weights (5, 4, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[129s] n=9 cost 2401 (ties; known 2401) weights (5, 4, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[129s] n=9 cost 2401 (ties; known 2401) weights (5, 4, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[131s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[131s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[131s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[131s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 2, 2) proved=True
+[131s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 2, 1) proved=True
+[131s] n=9 cost 2401 (ties; known 2401) weights (5, 3, 3, 3, 3, 3, 3, 3, 1, 1) proved=True
+[133s] n=9 cost 2401 (ties; known 2401) weights (4, 4, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[134s] n=9 cost 2401 (ties; known 2401) weights (4, 4, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[134s] n=9 cost 2401 (ties; known 2401) weights (4, 4, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[134s] n=9 cost 2401 (ties; known 2401) weights (4, 4, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[136s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[136s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[136s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[136s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 2, 2) proved=True
+[136s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 2, 1) proved=True
+[136s] n=9 cost 2401 (ties; known 2401) weights (4, 3, 3, 3, 3, 3, 3, 3, 1, 1) proved=True
+[138s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[138s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[138s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[138s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 2, 2) proved=True
+[139s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 2, 1) proved=True
+[139s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 3, 1, 1) proved=True
+[139s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 2, 2, 2) proved=True
+[139s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 2, 2, 1) proved=True
+[139s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 2, 1, 1) proved=True
+[139s] n=9 cost 2401 (ties; known 2401) weights (3, 3, 3, 3, 3, 3, 3, 1, 1, 1) proved=True
+[140s] n=9: all multisets of 10 weights done, best 2401, unresolved 0
+[144s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 8, 3, 3, 3, 3, 3, 3, 3) proved=True
+[147s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[150s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[152s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[153s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[153s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[153s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[153s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 8, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[158s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 7, 7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[162s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 7, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[165s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 7, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[166s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 7, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[167s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 7, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[167s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 7, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[167s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 7, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[172s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 6, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[178s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 6, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[180s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 6, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[181s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 6, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[181s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 6, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[181s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 6, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[187s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 5, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[191s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 5, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[193s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 5, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[193s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 5, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[193s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 5, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[195s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 4, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[196s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 4, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[196s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 4, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[196s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 4, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[198s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[198s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[199s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[199s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 2, 2) proved=True
+[199s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 2, 1) proved=True
+[199s] n=9 cost 2401 (ties; known 2401) weights (8, 8, 3, 3, 3, 3, 3, 3, 3, 1, 1) proved=True
+[205s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 7, 7, 3, 3, 3, 3, 3, 3, 3) proved=True
+[210s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 7, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[213s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 7, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[214s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 7, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[214s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 7, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[214s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 7, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[214s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 7, 3, 3, 3, 3, 3, 3, 3, 1) proved=True
+[219s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 6, 6, 3, 3, 3, 3, 3, 3, 3) proved=True
+[223s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 6, 5, 3, 3, 3, 3, 3, 3, 3) proved=True
+[225s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 6, 4, 3, 3, 3, 3, 3, 3, 3) proved=True
+[226s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 6, 3, 3, 3, 3, 3, 3, 3, 3) proved=True
+[226s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 6, 3, 3, 3, 3, 3, 3, 3, 2) proved=True
+[226s] n=9 cost 2401 (ties; known 2401) weights (8, 7, 6, 3, 3, 3, 3, 3, 3, 3, 1) proved=True

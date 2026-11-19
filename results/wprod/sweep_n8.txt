@@ -1,0 +1,30 @@
+[0s] n=8: all multisets of 3 weights done, best 1212, unresolved 0
+[0s] n=8: all multisets of 4 weights done, best 1212, unresolved 0
+[0s] n=8: all multisets of 5 weights done, best 1212, unresolved 0
+[1s] n=8: all multisets of 6 weights done, best 1212, unresolved 0
+[5s] n=8 cost 1212 (ties; known 1212) weights (5, 3, 3, 1, 1, 1, 1) proved=True
+[6s] n=8: all multisets of 7 weights done, best 1212, unresolved 0
+[9s] n=8 cost 1212 (ties; known 1212) weights (7, 5, 3, 3, 1, 1, 1, 1) proved=True
+[13s] n=8 cost 1212 (ties; known 1212) weights (6, 5, 3, 3, 1, 1, 1, 1) proved=True
+[15s] n=8 cost 1212 (ties; known 1212) weights (5, 5, 3, 3, 1, 1, 1, 1) proved=True
+[16s] n=8 cost 1212 (ties; known 1212) weights (5, 4, 3, 3, 1, 1, 1, 1) proved=True
+[16s] n=8 cost 1212 (ties; known 1212) weights (5, 3, 3, 3, 1, 1, 1, 1) proved=True
+[16s] n=8 cost 1212 (ties; known 1212) weights (5, 3, 3, 2, 1, 1, 1, 1) proved=True
+[16s] n=8 cost 1210 (RECORD; known 1212) weights (5, 3, 3, 1, 1, 1, 1, 1) proved=True
+[18s] n=8: all multisets of 8 weights done, best 1210, unresolved 0
+[29s] n=8 cost 1210 (RECORD; known 1212) weights (7, 5, 3, 3, 1, 1, 1, 1, 1) proved=True
+[40s] n=8 cost 1210 (RECORD; known 1212) weights (6, 5, 3, 3, 1, 1, 1, 1, 1) proved=True
+[45s] n=8 cost 1210 (RECORD; known 1212) weights (5, 5, 3, 3, 1, 1, 1, 1, 1) proved=True
+[48s] n=8 cost 1210 (RECORD; known 1212) weights (5, 4, 3, 3, 1, 1, 1, 1, 1) proved=True
+[50s] n=8 cost 1210 (RECORD; known 1212) weights (5, 3, 3, 3, 1, 1, 1, 1, 1) proved=True
+[50s] n=8 cost 1210 (RECORD; known 1212) weights (5, 3, 3, 2, 1, 1, 1, 1, 1) proved=True
+[50s] n=8 cost 1163 (RECORD; known 1212) weights (5, 3, 3, 1, 1, 1, 1, 1, 1) proved=True
+[55s] n=8: all multisets of 9 weights done, best 1163, unresolved 0
+[92s] n=8 cost 1163 (RECORD; known 1212) weights (7, 5, 3, 3, 1, 1, 1, 1, 1, 1) proved=True
+[130s] n=8 cost 1163 (RECORD; known 1212) weights (6, 5, 3, 3, 1, 1, 1, 1, 1, 1) proved=True
+[153s] n=8 cost 1163 (RECORD; known 1212) weights (5, 5, 3, 3, 1, 1, 1, 1, 1, 1) proved=True
+[173s] n=8 cost 1163 (RECORD; known 1212) weights (5, 4, 3, 3, 1, 1, 1, 1, 1, 1) proved=True
+[192s] n=8 cost 1163 (RECORD; known 1212) weights (5, 3, 3, 3, 1, 1, 1, 1, 1, 1) proved=True
+[198s] n=8 cost 1163 (RECORD; known 1212) weights (5, 3, 3, 2, 1, 1, 1, 1, 1, 1) proved=True
+[199s] n=8 cost 1163 (RECORD; known 1212) weights (5, 3, 3, 1, 1, 1, 1, 1, 1, 1) proved=True
+[224s] n=8: all multisets of 10 weights done, best 1163, unresolved 0
