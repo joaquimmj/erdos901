@@ -1,0 +1,16 @@
+[    0.0s] it=1 proper colourings: 752
+[   48.0s] it=48017 proper colourings: 751
+[  113.0s] it=115929 proper colourings: 731
+[  254.6s] it=255420 proper colourings: 714
+[  255.0s] it=255832 proper colourings: 710
+[  255.0s] it=255838 proper colourings: 703
+[  260.7s] it=262319 proper colourings: 686
+[  306.2s] it=307217 proper colourings: 684
+[  309.1s] it=310472 proper colourings: 682
+[  356.4s] it=356628 proper colourings: 677
+[  554.9s] it=556504 proper colourings: 675
+[  994.3s] it=1000644 proper colourings: 674
+[ 3909.4s] it=3922048 proper colourings: 671
+[ 3989.0s] it=4007621 proper colourings: 668
+[ 3989.2s] it=4007784 proper colourings: 663
+no success: best had 663 proper colourings after 6986364 moves

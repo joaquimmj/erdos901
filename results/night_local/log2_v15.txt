@@ -1,0 +1,2 @@
+[    0.0s] it=1 proper colourings: 624
+no success: best had 624 proper colourings after 12142461 moves

@@ -1,0 +1,2 @@
+[    0.0s] it=1 proper colourings: 448
+[    0.0s] it=12 proper colourings: 325
