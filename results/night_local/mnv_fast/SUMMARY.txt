@@ -1,0 +1,12 @@
+m(5,11) <= 66 (seed 7)
+m(5,12) <= 66 (seed 7)
+m(5,13) <= 65 (seed 7)
+m(5,14) <= 65 (seed 7)
+m(5,15) <= 61 (seed 7)
+m(5,16) <= 57 (seed 7)
+python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
+python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
+python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
+python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
+python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
+python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory

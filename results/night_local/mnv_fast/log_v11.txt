@@ -33,3 +33,5 @@ non-2-colourable with 69 edges -> out/mnvf/anneal_n5_v11_s7_E69.txt (run verify/
 non-2-colourable with 68 edges -> out/mnvf/anneal_n5_v11_s7_E68.txt (run verify/certify.sh before believing it)
 non-2-colourable with 67 edges -> out/mnvf/anneal_n5_v11_s7_E67.txt (run verify/certify.sh before believing it)
 non-2-colourable with 66 edges -> out/mnvf/anneal_n5_v11_s7_E66.txt (run verify/certify.sh before believing it)
+no success: best had 7 proper colourings after 478098789 moves
+m(5,11) <= 66 (seed 7)
