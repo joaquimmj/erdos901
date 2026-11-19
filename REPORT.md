@@ -345,3 +345,19 @@ Dépôt public `AyushAg1002/property-b-m5-lower33` (Ayush Agarwal, 24 août 2026
 
 Conséquences : le terrain n'est pas libre, contrairement à ce que dit le plan. La mise à jour OEIS doit mentionner 32
 (publié) et signaler 33 comme annoncé.
+
+## Suite du 19 nov. 2026 : outils open source
+
+- **Isomorphisme (`search/iso.py`, igraph/BLISS).** Tous les hypergraphes à 51 arêtes obtenus par quatre méthodes
+  différentes (recherche locale depuis le hasard, CEGAR avec symétrie de Fano, optimiseur de joints, CEGAR avec le
+  groupe complet) sont **isomorphes** au 51 d'Abbott–Hanson–Toft. Tous les 23 trouvés pour n = 4 (v = 11, 12, 13) sont
+  isomorphes au témoin de Seymour–Toft, ce qui recoupe l'unicité d'Östergård. Des recherches supplémentaires à
+  51 arêtes (v = 16 et 17) tournent pour voir s'il existe un second 51.
+- **Joints mixtes** (Fano + paires et triangle + triples sur le même W, n = 5) : optimum 67 à |W| = 8, 51 à |W| = 10
+  (sans aucun triple), infaisable à ≤ 50 pour |W| = 9 et 10. Script d'essai non versionné.
+- **Solveur exact générique (OR-Tools CP-SAT) pour m(n, v) : abandonné.** Il n'a pas su prouver m(4,8) = 35 en 5 min
+  (borne inférieure 1). `exact_mnv.py` n'existe donc pas ; les bornes inférieures de m(5, v) restent hors de portée ici.
+- **Lot GitHub Actions `batch` (run 44531901519, 30 calculs de 5 h 30)** : joints pour n = 7 (base le 51, paires,
+  |W| = 11 à 15 ; bases Fano et triangle), n = 8 (bases 147, Seymour–Toft, Fano, triangle), n = 5 et 6 à |W| plus
+  grand, et symétrie de Fano à 18, 19, 20 sommets. Raison d'essayer n ≥ 7 : Aglave et al. battent Abbott–Hanson pour
+  n = 11 avec 9 paires au lieu de 11, donc la forme optimale du joint n'est pas toujours celle d'Abbott–Hanson.
