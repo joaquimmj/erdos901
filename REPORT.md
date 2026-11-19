@@ -329,3 +329,19 @@ Calibrage de la descente sur n = 4 (7 min, une graine, en local) : m(4,8) ≤ 35
 m(4,11) ≤ 23, m(4,12) ≤ 23, m(4,13) ≤ 23. Les valeurs exactes connues sont retrouvées : 35 (bipartitions équilibrées),
 26 (Lewkowicz), 23 (Seymour–Toft, Östergård). La valeur exacte de m(4,10) n'a pas été cherchée dans la littérature
 (Östergård donne seulement ≥ 24).
+
+## Littérature : un travail concurrent (lu le 19 nov. 2026)
+
+Dépôt public `AyushAg1002/property-b-m5-lower33` (Ayush Agarwal, 24 août 2026, DOI 10.5281/zenodo.22070117) :
+- annonce **m(5) ≥ 33** par certificat exact (rationnels, sans énumération) ; non relu par des pairs ; son vérificateur
+  n'a pas été exécuté ici ;
+- côté borne supérieure, il reconstruit le 51 et prouve qu'aucune des 7 824 675 « réparations de rayon 1 » à 50 arêtes
+  ne marche ; rayon 2 non conclu. Aucune amélioration de 51 annoncée ;
+- sa revue de littérature signale un **risque de collision** : un travail non publié de Linzmayer et Grill (2024),
+  « Some upper bounds for property B for small values of n by heuristic search ». Avant de présenter comme nouvelles des
+  bornes de m(5, v), il faut leur écrire ;
+- réduction utile : on peut identifier deux sommets qui ne sont jamais dans une même arête, donc un contre-exemple
+  minimal couvre toutes les paires de sommets.
+
+Conséquences : le terrain n'est pas libre, contrairement à ce que dit le plan. La mise à jour OEIS doit mentionner 32
+(publié) et signaler 33 comme annoncé.
