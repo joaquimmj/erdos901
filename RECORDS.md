@@ -19,8 +19,10 @@ Colonne « ici » : **non relu, non annoncé**. Voir `REPORT.md` pour le détail
 | 14 | 528218 | Aglave et al., multi-cœur k = 5 | | **426775** : produit pondéré, vérifié par `verify/check_wprod.py` |
 | 15 | 857157 | Abbott–Moser : m(3)⁵·m(5) | | |
 | 16 | 3308499 | Aglave et al., bloc modifié k = 5 | | |
-| 17 | 10375782 | Aglave et al., multi-cœur k = 7 | | **10153304** : produit pondéré, vérifié par `verify/check_wprod.py` |
+| 17 | 10375782 | Aglave et al., multi-cœur k = 7 | | **10105016** : produit pondéré, vérifié par `verify/check_wprod.py` |
 | 19 | aucune (69295337 par les récurrences publiées) | | | **61059814** : produit pondéré, vérifié |
 | 22 | aucune (1605775675 par les récurrences publiées) | | | **1395535872** : Abbott–Moser 3·m(11)² avec le nouveau m(11) |
+| 23 | aucune (4128022710 par les récurrences publiées) | | | **3396112693** : produit pondéré, vérifié |
+| 24 | aucune (6986938812 par les récurrences publiées) | | | **6704463563** : Abbott–Moser m(3)⁸·m(8) avec le nouveau m(8) |
 
 Source : `results/wprod/merged.txt` (toutes les lignes passent `verify/check_wprod.py`). Les bornes pour n = 13, 14, 17 utilisent m(8) ≤ 1163. Balayages plus larges en cours.

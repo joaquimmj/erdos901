@@ -1,1 +1,8 @@
 [6s] n=9 best 2401 (published 2401) known
+[26s] n=10 best 7803 (published 7803) known
+[42s] n=11 best 21568 (published 25449) known
+[75s] n=12 best 55223 (published 55223) known
+[127s] n=13 best 182064 (published 200889) known
+[197s] n=14 best 426775 (published 528218) known
+[244s] n=15 best 857157 (published 857157) known
+[377s] n=16 best 3308499 (published 3308499) known

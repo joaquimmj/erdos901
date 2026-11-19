@@ -384,11 +384,13 @@ Lancé avec cette version :
 | 11 | 25449 | **21568** | 5, 5, 3, 3, 3, 3 et deux sommets |
 | 13 | 200889 | **182064** | 8, 5, 5, 3 et six sommets |
 | 14 | 528218 | **426775** | 9, 5, 5, 3, 2 et sept sommets |
-| 17 | 10375782 | **10153304** | 9, 8, 6, 6, 5 et sept sommets |
+| 17 | 10375782 | **10105016** | 9, 8, 6, 6, 5 et sept sommets |
 | 19 | aucune (69295337 par leurs récurrences) | **61059814** | 9, 9, 5, 5, 5, 5 et quatre sommets |
 | 22 | aucune (1605775675 par leurs récurrences) | **1395535872** | Abbott–Moser 3·m(11)² |
+| 23 | aucune (4128022710 par leurs récurrences) | **3396112693** | 14, 9, 9, 5, 4 et quatre sommets |
+| 24 | aucune (6986938812 par leurs récurrences) | **6704463563** | Abbott–Moser m(3)⁸·m(8) |
 
-Balayages : jusqu'à 6 composantes de poids ≥ 2 et jusqu'à 10 sommets isolés ; lignes retenues dans `results/wprod/merged.txt`. n = 5, 6, 7, 9, 10, 12, 15, 16 : pas d'amélioration dans cette plage. Les bornes pour n = 13, 14, 17 utilisent m(8) ≤ 1163.
+Balayages : jusqu'à 6 composantes de poids ≥ 2 et jusqu'à 10 sommets isolés ; lignes retenues dans `results/wprod/merged.txt`. Second tour (`r2_*.txt`) : jusqu'à 8 composantes lourdes pour n ≤ 10 et 7 pour n ≤ 16, sans autre amélioration. n = 5, 6, 7, 9, 10, 12, 15, 16 : pas d'amélioration dans cette plage. Les bornes pour n = 13, 14, 17 utilisent m(8) ≤ 1163.
 
 **Vérification.** `verify/check_wprod.py` (code indépendant de l'optimiseur) refait, pour chaque ligne : poids de chaque partie ≥ n, non-2-colorabilité de G par énumération des 2^p colorations, coût. n = 8 : hypergraphe explicite `constructions/wprod1163.txt` (37 sommets), CaDiCaL + DRAT vérifié par drat-trim + Glucose, et preuve à la main. Pour n ≥ 11 il n'y a pas d'hypergraphe explicite certifié par SAT : la preuve est le lemme ci-dessus plus la vérification de G.
 
