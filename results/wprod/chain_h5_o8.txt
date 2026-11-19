@@ -1,0 +1,2 @@
+[556s] n=5 best 51 (published 51) known
+[2165s] n=6 best 147 (published 147) known
