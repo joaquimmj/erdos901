@@ -1,3 +1,11 @@
 [    0.0s] it=0 proper colourings: 24668
 [    0.1s] it=200 proper colourings: 9815
 [    4.7s] it=17822 proper colourings: 7994
+[    9.8s] it=36634 proper colourings: 7939
+[   14.8s] it=55379 proper colourings: 7907
+[   19.7s] it=74095 proper colourings: 7686
+[   44.6s] it=168374 proper colourings: 7631
+[   79.8s] it=303839 proper colourings: 7481
+[   84.5s] it=322341 proper colourings: 7472
+[   94.8s] it=361597 proper colourings: 7414
+[  274.7s] it=1058096 proper colourings: 7226
