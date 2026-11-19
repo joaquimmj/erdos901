@@ -3,12 +3,12 @@
  "v": 18,
  "group": "fano_f11",
  "seed": 0,
- "status": "timeout",
- "iterations": 8,
- "constraints": 13507,
- "seconds": 900.2,
+ "status": "infeasible_at_target",
+ "iterations": 10,
+ "constraints": 14313,
+ "seconds": 1620.9,
  "record": 51,
  "last_master_cost": 50,
- "last_master_optimal": false,
- "lower_bound_this_v": null
+ "last_master_optimal": true,
+ "lower_bound_this_v": 50
 }

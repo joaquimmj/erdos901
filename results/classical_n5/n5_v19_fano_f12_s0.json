@@ -1,0 +1,14 @@
+{
+ "n": 5,
+ "v": 19,
+ "group": "fano_f12",
+ "seed": 0,
+ "status": "timeout",
+ "iterations": 11,
+ "constraints": 17886,
+ "seconds": 6500.4,
+ "record": 51,
+ "last_master_cost": 50,
+ "last_master_optimal": false,
+ "lower_bound_this_v": null
+}

@@ -314,7 +314,8 @@ fixes, et des produits avec le groupe de Fano. 48 groupes, v = 11 à 21, cible �
 - **Symétrie de Fano sur 7 points, 10 autres sommets libres (v = 17, 693 orbites, tous les profils d'arêtes permis) :
   le minimum est exactement 51** (optimum prouvé en 146 s ; ≤ 50 prouvé infaisable en 318 s).
   Même conclusion (infaisable à ≤ 50) pour 8 et 9 sommets libres.
-- Fano + 11 sommets libres (v = 18) : pas de réponse en 15 min, relancé pour 2 h avec Fano + 12.
+- Fano + 11 sommets libres (v = 18) : **infaisable à ≤ 50**, prouvé en 27 min. Fano + 12 (v = 19) : pas de réponse en
+  1 h 50, relancé sur GitHub Actions (lot `batch`) avec Fano + 13.
 
 Lecture : tout hypergraphe à 50 arêtes sur au plus 17 sommets devrait renoncer à la symétrie de Fano sur 7 sommets.
 Avec la recherche locale qui retombe sur le 51, cela fait deux indices indépendants que 51 est difficile à battre à
