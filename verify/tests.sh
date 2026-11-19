@@ -52,5 +52,11 @@ with tempfile.TemporaryDirectory() as d:
                     "--time", "5", "--step-time", "10", "--out", d], check=True, capture_output=True)
     assert proper_coloring(read_edges(d + "/lns_s0_E7.txt")) is None
 print("ok  LNS reduces Fano + 1 edge back to 7 edges")
+# direct local search must rediscover a 7-edge 3-uniform hypergraph on 7 vertices
+with tempfile.TemporaryDirectory() as d:
+    subprocess.run([sys.executable, "search/anneal.py", "--n", "3", "--v", "7", "--edges", "7",
+                    "--time", "60", "--out", d], check=True, capture_output=True)
+    assert proper_coloring(read_edges(d + "/anneal_n3_v7_s0_E7.txt")) is None
+print("ok  local search finds 7 edges for n=3")
 print("ALL TESTS PASSED")
 EOF

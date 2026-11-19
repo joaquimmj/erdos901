@@ -51,6 +51,8 @@ none, the set has no 2-colouring and is a candidate.
 | `search/calibrate.py` | runs the search over all block groups for a given n and v |
 | `groups/` | permutation groups as JSON generators |
 | `constructions/seymour_toft.txt` | the 23-edge witness for m(4), from OEIS A392185 |
+| `search/anneal.py` | direct local search on the number of proper 2-colourings, no symmetry; finds 23 edges for n = 4 in seconds |
+| `search/lns.py` | large-neighbourhood search around a known construction |
 | `search/reduce.py` | greedy edge deletion from a known construction |
 | `.github/workflows/` | tests on every push, and a parallel search launched by hand |
 

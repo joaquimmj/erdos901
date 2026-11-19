@@ -223,3 +223,25 @@ couverture à la place de la résolution exacte, qui ne servirait qu'à la fin).
   La page n'a pas pu être lue d'ici (auteurs, date et contenu inconnus). Si c'est confirmé, la mise à jour OEIS
   doit citer 33 et non 32.
 - La recherche s'est limitée à deux requêtes web : ce n'est pas une revue complète.
+
+---
+
+# Recherche locale directe (19 novembre 2026)
+
+`search/anneal.py` abandonne le maître ILP. L'état est un ensemble de K arêtes ; le coût est le nombre exact de
+2-colorations propres (toutes les 2^(v−1) colorations sont suivies). À chaque pas on prend une coloration propre au
+hasard, on ajoute une arête qui la tue, et on retire l'arête la moins utile.
+
+| Essai | Résultat |
+|---|---|
+| n = 3, v = 7, K = 7 | trouvé, immédiat |
+| n = 4, v = 11, K = 23, départ aléatoire, sans symétrie | **trouvé en 2,5 s** (deux graines sur deux), certifié par les trois contrôles |
+| n = 5, v = 17, K = 51, départ aléatoire, 2 graines × 280 s | 1 trouvé ; l'autre bloqué vers 2 100 colorations propres |
+| n = 5, v = 17, K = 50, départ = le 51 moins une arête, 250 s | non trouvé ; 448 colorations propres au départ, 325 au mieux |
+
+C'est la première méthode du repo qui retrouve 23 sans symétrie ni indice. Pour n = 5 elle retrouve aussi un
+hypergraphe à 51 arêtes depuis un départ aléatoire (non comparé au 51 connu), mais rien à 50 en quelques minutes.
+
+**Campagne longue lancée le 19 novembre** (workflow `anneal.yml`, déclenché par une branche `run/...`) : n = 5,
+K = 50, v = 13 à 20, 20 machines × 4 graines, environ 5 h 30 chacune. Quatre machines partent du 51. Tout succès
+est certifié et écrit sur la branche `results`.

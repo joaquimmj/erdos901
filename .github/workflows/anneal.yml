@@ -1,0 +1,83 @@
+name: anneal
+# Long local-search campaign for m(5) <= 50. Starts when a branch named run/... is pushed.
+# Each job runs 4 seeds in parallel for about 5.5 hours; any hit is certified and committed to `results`.
+on:
+  push:
+    branches: ["run/**"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        v: [13, 14, 15, 16, 17, 18, 19, 20]
+        seed: [0, 1]
+        start: [""]
+        include:
+          - { v: 17, seed: 2, start: "--start constructions/aht51.txt" }
+          - { v: 17, seed: 3, start: "--start constructions/aht51.txt --noise 1" }
+          - { v: 18, seed: 2, start: "--start constructions/aht51.txt" }
+          - { v: 19, seed: 2, start: "--start constructions/aht51.txt" }
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install numpy
+      - name: anneal
+        run: |
+          mkdir -p out
+          for i in 0 1 2 3; do
+            S=$(( ${{ matrix.seed }} * 4 + i ))
+            python3 search/anneal.py --n 5 --v ${{ matrix.v }} --edges 50 --seed $S --time 19800 \
+              ${{ matrix.start }} --out out > out/log_v${{ matrix.v }}_s$S.txt 2>&1 &
+          done
+          wait
+          tail -n 2 out/log_*.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: anneal-v${{ matrix.v }}-s${{ matrix.seed }}
+          path: out/
+          retention-days: 30
+  collect:
+    needs: run
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { path: art }
+      - run: pip install numpy python-sat && make
+      - name: tools for certification
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq cadical
+          git clone --depth 1 https://github.com/marijnheule/drat-trim /tmp/drat-trim
+          (cd /tmp/drat-trim && gcc -O2 -std=gnu11 -Wno-implicit-function-declaration drat-trim.c -o drat-trim) \
+            && sudo cp /tmp/drat-trim/drat-trim /usr/local/bin/
+      - name: summarise + certify hits
+        run: |
+          RUN=results/anneal_${{ github.run_id }}
+          mkdir -p "$RUN"
+          { echo "| log | last line |"; echo "|---|---|"
+            for f in $(find art -name 'log_*.txt' | sort); do echo "| $(basename $f) | $(tail -n 1 $f) |"; done
+          } | tee "$RUN/SUMMARY.md" >> "$GITHUB_STEP_SUMMARY"
+          for f in $(find art -name 'anneal_*_E*.txt'); do
+            echo "!!! certifying $f" | tee -a "$RUN/SUMMARY.md"
+            bash verify/certify.sh "$f" "$RUN/cert_$(basename $f .txt)" | tee -a "$RUN/SUMMARY.md"
+          done
+      - name: commit results (results branch)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch origin results:results 2>/dev/null; then
+            git worktree add /tmp/rb results
+          else
+            git worktree add --orphan -b results /tmp/rb
+          fi
+          cp -r results/anneal_* /tmp/rb/
+          cd /tmp/rb && git add -A && git commit -q -m "results: anneal run ${{ github.run_id }}" \
+            && git push origin results || echo "nothing to commit"
