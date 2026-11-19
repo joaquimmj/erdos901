@@ -162,3 +162,6 @@
 [  129.2s] it=115857 proper colourings: 738
 [  129.2s] it=115882 proper colourings: 736
 [  129.4s] it=116146 proper colourings: 727
+[ 1418.8s] it=1229057 proper colourings: 723
+[ 1418.8s] it=1229069 proper colourings: 719
+[ 1483.4s] it=1283639 proper colourings: 709
