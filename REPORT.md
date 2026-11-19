@@ -222,6 +222,8 @@ couverture à la place de la résolution exacte, qui ne servirait qu'à la fin).
 - **À vérifier :** une fiche ResearchGate récente s'intitule « A new lower bound for property B: m(5) ≥ 33 ».
   La page n'a pas pu être lue d'ici (auteurs, date et contenu inconnus). Si c'est confirmé, la mise à jour OEIS
   doit citer 33 et non 32.
+  Seconde recherche (19 nov. 2026) : un dépôt GitHub `AyushAg1002/property-b-m5-lower33` annonce un certificat exact
+  pour m(5) ≥ 33, non relu par des pairs, non vérifié ici. Toujours aucune source sous 51.
 - La recherche s'est limitée à deux requêtes web : ce n'est pas une revue complète.
 
 ---
