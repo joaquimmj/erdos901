@@ -1,0 +1,1 @@
+SAT sans conclusion : CaDiCaL n'a pas terminé en 900 s (preuve partielle de 1,9 Go, supprimée) ; Glucose interrompu. La ligne n = 11 repose sur le lemme des produits pondérés et verify/check_wprod.py.

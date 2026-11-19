@@ -392,7 +392,7 @@ Lancé avec cette version :
 
 Balayages : jusqu'à 6 composantes de poids ≥ 2 et jusqu'à 10 sommets isolés ; lignes retenues dans `results/wprod/merged.txt`. Second tour (`r2_*.txt`) : jusqu'à 8 composantes lourdes pour n ≤ 10 et 7 pour n ≤ 16, sans autre amélioration. n = 5, 6, 7, 9, 10, 12, 15, 16 : pas d'amélioration dans cette plage. Les bornes pour n = 13, 14, 17 utilisent m(8) ≤ 1163.
 
-**Vérification.** `verify/check_wprod.py` (code indépendant de l'optimiseur) refait, pour chaque ligne : poids de chaque partie ≥ n, non-2-colorabilité de G par énumération des 2^p colorations, coût. n = 8 : hypergraphe explicite `constructions/wprod1163.txt` (37 sommets), CaDiCaL + DRAT vérifié par drat-trim + Glucose, et preuve à la main. Pour n ≥ 11 il n'y a pas d'hypergraphe explicite certifié par SAT : la preuve est le lemme ci-dessus plus la vérification de G.
+**Vérification.** `verify/check_wprod.py` (code indépendant de l'optimiseur) refait, pour chaque ligne : poids de chaque partie ≥ n, non-2-colorabilité de G par énumération des 2^p colorations, coût. n = 8 : hypergraphe explicite `constructions/wprod1163.txt` (37 sommets), CaDiCaL + DRAT vérifié par drat-trim + Glucose, et preuve à la main. n = 11 : hypergraphe explicite `constructions/wprod21568.txt` (64 sommets), mais CaDiCaL n'a pas conclu en 900 s. Pour n ≥ 11 la preuve est donc le lemme ci-dessus plus la vérification de G, sans certificat SAT.
 
 **Réserves.** Nouveauté non établie : rien sous ces valeurs dans arXiv 2024–2026, mais le travail non publié de Linzmayer–Grill n'a pas pu être consulté. Les optimums reposent sur HiGHS ; seules les bornes supérieures sont vérifiées indépendamment.
 
