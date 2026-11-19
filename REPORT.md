@@ -391,3 +391,13 @@ Balayage : au plus 4 composantes de poids ≥ 2 et 8 sommets isolés (`results/w
 **Vérification.** `verify/check_wprod.py` (code indépendant de l'optimiseur) refait, pour chaque ligne : poids de chaque partie ≥ n, non-2-colorabilité de G par énumération des 2^p colorations, coût. n = 8 : hypergraphe explicite `constructions/wprod1163.txt` (37 sommets), CaDiCaL + DRAT vérifié par drat-trim + Glucose, et preuve à la main. Pour n ≥ 11 il n'y a pas d'hypergraphe explicite certifié par SAT : la preuve est le lemme ci-dessus plus la vérification de G.
 
 **Réserves.** Nouveauté non établie : rien sous ces valeurs dans arXiv 2024–2026, mais le travail non publié de Linzmayer–Grill n'a pas pu être consulté. Les optimums reposent sur HiGHS ; seules les bornes supérieures sont vérifiées indépendamment.
+
+## Bornes supérieures de m(5, v) (campagne `mnv` 44524361427 et descentes locales)
+
+Nombre minimal d'arêtes trouvé pour un hypergraphe 5-uniforme non 2-coloriable sur au plus v sommets. Chaque valeur est certifiée (force brute + DRAT + Glucose pour la campagne ; force brute pour v = 15, descente locale `results/night_local/mnv_fast/`).
+
+| v | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 |
+|---|---|---|---|---|---|---|---|---|---|
+| m(5, v) ≤ | 126 | 66 | 66 | 65 | 65 | 61 | 57 | 51 | 51 |
+
+Calibrage : 126 (exact, toutes les 5-parties) et 66 (valeur connue) sont retrouvés par les 4 graines ; 51 à v = 17 par 2 graines sur 4. Ce sont des bornes supérieures heuristiques ; aucune borne inférieure n'est calculée ici, et Linzmayer–Grill (non publié) ont peut-être déjà ces valeurs.

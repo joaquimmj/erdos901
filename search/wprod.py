@@ -50,7 +50,9 @@ if __name__ == "__main__":
     ap.add_argument("--chain", type=int, help="run n = --n .. CHAIN with --heavy/--ones shapes")
     ap.add_argument("--heavy", type=int, default=4); ap.add_argument("--ones", type=int, default=8)
     ap.add_argument("--target", type=int); ap.add_argument("--time", type=float, default=20)
+    ap.add_argument("--known", default="", help="bounds to use instead of the published ones, e.g. 8:1163,13:182064")
     a = ap.parse_args(); n = a.n
+    M.update({int(k): int(v) for k, v in (x.split(":") for x in a.known.split(",") if x)})
     if a.weights:
         c, ok, sets = solve(n, [int(x) for x in a.weights.split(",")], a.target, a.time)
         u = [int(x) for x in a.weights.split(",")]
