@@ -1,0 +1,3 @@
+[    0.0s] it=0 proper colourings: 24668
+[    0.1s] it=200 proper colourings: 9815
+[    4.7s] it=17822 proper colourings: 7994
