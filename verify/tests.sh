@@ -58,5 +58,13 @@ with tempfile.TemporaryDirectory() as d:
                     "--time", "60", "--out", d], check=True, capture_output=True)
     assert proper_coloring(read_edges(d + "/anneal_n3_v7_s0_E7.txt")) is None
 print("ok  local search finds 7 edges for n=3")
+# join optimiser: 23 for n=4 (Seymour-Toft is triangle + 4 pairs + 11 edges), and the descent script
+with tempfile.TemporaryDirectory() as d:
+    subprocess.run([sys.executable, "search/join.py", "--n", "4", "--r", "2", "--w", "8", "--time", "120", "--out", d],
+                   check=True, capture_output=True)
+    assert proper_coloring(read_edges(d + "/join_n4_r2_w8_E23.txt")) is None
+    out = subprocess.run(["bash", "search/descend.sh", "3", "7", "9", "0", "90", d], capture_output=True, text=True).stdout
+    assert "m(3,7) <= 7" in out, out
+print("ok  join optimum 23 for n=4; descent gives m(3,7) <= 7")
 print("ALL TESTS PASSED")
 EOF

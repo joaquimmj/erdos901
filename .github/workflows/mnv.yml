@@ -1,0 +1,77 @@
+name: mnv
+# Upper bounds for m(5, v): descend K while the local search succeeds. Starts on a push to a branch mnv/...
+# Hit files, logs and certificates of the best hypergraph per v go to the `results` branch.
+on:
+  push:
+    branches: ["mnv/**"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { v: 10, k0: 130 }   # calibration: exact value 126
+          - { v: 11, k0: 80 }    # calibration: 66 (Steiner system S(4,5,11))
+          - { v: 12, k0: 100 }
+          - { v: 13, k0: 100 }
+          - { v: 14, k0: 100 }
+          - { v: 15, k0: 100 }
+          - { v: 16, k0: 100 }
+          - { v: 17, k0: 70 }    # calibration: 51 known
+          - { v: 18, k0: 80 }
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install numpy
+      - name: descend
+        run: |
+          for s in 0 1 2 3; do
+            bash search/descend.sh 5 ${{ matrix.v }} ${{ matrix.k0 }} $s 19500 out > log_v${{ matrix.v }}_s$s.txt 2>&1 &
+          done
+          wait
+          mv log_*.txt out/; tail -n 1 out/log_*.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "mnv-v${{ matrix.v }}", path: out/, retention-days: 30 }
+  collect:
+    needs: run
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { path: art }
+      - run: pip install numpy python-sat && make
+      - name: tools for certification
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq cadical
+          git clone --depth 1 https://github.com/marijnheule/drat-trim /tmp/drat-trim
+          (cd /tmp/drat-trim && gcc -O2 -std=gnu11 -Wno-implicit-function-declaration drat-trim.c -o drat-trim) \
+            && sudo cp /tmp/drat-trim/drat-trim /usr/local/bin/
+      - name: summarise + certify the best per v
+        run: |
+          RUN=results/mnv_${{ github.run_id }}
+          mkdir -p "$RUN"
+          { echo "| log | last line |"; echo "|---|---|"
+            for f in $(find art -name 'log_*.txt' | sort); do echo "| $(basename $f) | $(tail -n 1 $f) |"; done
+          } | tee "$RUN/SUMMARY.md" >> "$GITHUB_STEP_SUMMARY"
+          for d in art/mnv-v*; do
+            f=$(ls $d/anneal_*_E*.txt 2>/dev/null | sort -t E -k 2 -n | head -n 1)
+            [ -n "$f" ] || continue
+            cp "$f" "$RUN/"; cp $d/state_*.txt "$RUN/" 2>/dev/null || true
+            echo "certifying $f" | tee -a "$RUN/SUMMARY.md"
+            bash verify/certify.sh "$f" "$RUN/cert_$(basename $f .txt)" | tail -n 3 | tee -a "$RUN/SUMMARY.md" || true
+          done
+      - name: commit results (results branch)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin results:results && git worktree add /tmp/rb results
+          cp -r results/mnv_* /tmp/rb/
+          cd /tmp/rb && git add -A && git commit -q -m "results: mnv run ${{ github.run_id }}" \
+            && git push origin results || echo "nothing to commit"
