@@ -1,0 +1,2 @@
+[61s] n=9 best 2401 (published 2401) known
+[182s] n=10 best 7803 (published 7803) known
