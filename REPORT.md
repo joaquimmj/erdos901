@@ -170,6 +170,25 @@ groupe n'a 50 arêtes ou moins. Elles ne sont pas triviales pour tous les groupe
 Pour les groupes à blocs, beaucoup de petites orbites étaient disponibles et le résultat reste négatif. **La
 famille qui retrouve 23 pour n = 4 ne se transpose donc pas telle quelle à n = 5 sur 11 à 14 sommets.**
 
+### Recherches à faible symétrie : non concluantes
+
+Le conteneur de calcul a redémarré pendant ces lancements. Ce qui a pu être relevé :
+
+| Recherche (v = 17, cible ≤ 50) | Budget | Résultat |
+|---|---|---|
+| Z₂ (un double échange de paires), 4 030 orbites | 25 min | 4 itérations, dernier coût du maître 40, non conclu |
+| Z₂², 2 612 orbites | 25 min | 4 itérations, dernier coût du maître 45, non conclu |
+| Z₂⁴, 1 718 orbites | 25 min | 4 itérations, aucune solution du maître à la fin |
+| Z₇, Z₅, Z₃ (trois variantes), Z₃ × Z₃ | — | perdus au redémarrage, non relancés |
+| LNS depuis le 51, voisinages de 2 sommets (26 ou 27 arêtes libérées), 170 s chacun | 3 voisinages | 3 timeouts |
+| LNS, voisinages de 2 à 3 sommets, 400 s chacun | 1 h prévue | perdu au redémarrage |
+
+Aucune de ces lignes ne prouve quoi que ce soit. Le blocage est le maître ILP : avec peu de symétrie il a des
+milliers de variables et chaque résolution atteint sa limite de temps (4 itérations en 25 minutes, là où il en
+faudrait des centaines). **Sous cette forme, CEGAR à faible symétrie et LNS ne sont pas praticables pour n = 5** ;
+plus de minutes sur GitHub Actions ne suffiront pas sans changer le maître (par exemple une heuristique de
+couverture à la place de la résolution exacte, qui ne servirait qu'à la fin).
+
 ## m(5, v) exact
 
 - **m(5, 10) = 126.** Borne inférieure : chacune des 126 bipartitions 5 + 5 impose de prendre une de ses deux
