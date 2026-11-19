@@ -324,3 +324,8 @@ Avec la recherche locale qui retombe sur le 51, cela fait deux indices indépend
 
 `search/descend.sh` baisse K tant que la recherche locale réussit. Campagne GitHub Actions `mnv`
 (run 44524361427, v = 10 à 18, 4 graines, 5 h 30) en cours ; v = 10, 11 et 17 servent de calibrage (126, 66, 51 attendus).
+
+Calibrage de la descente sur n = 4 (7 min, une graine, en local) : m(4,8) ≤ 35, m(4,9) ≤ 26, m(4,10) ≤ 25,
+m(4,11) ≤ 23, m(4,12) ≤ 23, m(4,13) ≤ 23. Les valeurs exactes connues sont retrouvées : 35 (bipartitions équilibrées),
+26 (Lewkowicz), 23 (Seymour–Toft, Östergård). La valeur exacte de m(4,10) n'a pas été cherchée dans la littérature
+(Östergård donne seulement ≥ 24).
