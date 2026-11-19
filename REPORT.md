@@ -362,3 +362,14 @@ Conséquences : le terrain n'est pas libre, contrairement à ce que dit le plan.
   |W| = 11 à 15 ; bases Fano et triangle), n = 8 (bases 147, Seymour–Toft, Fano, triangle), n = 5 et 6 à |W| plus
   grand, et symétrie de Fano à 18, 19, 20 sommets. Raison d'essayer n ≥ 7 : Aglave et al. battent Abbott–Hanson pour
   n = 11 avec 9 paires au lieu de 11, donc la forme optimale du joint n'est pas toujours celle d'Abbott–Hanson.
+
+## Recherche locale compilée (19 nov. 2026, après-midi)
+
+`search/anneal.py` utilise maintenant numba et une mise à jour incrémentale (par arête, on ne touche que les
+2^(v−n) colorations qu'elle rend monochromes). Mesuré : 14 500 coups/s à v = 17 contre 385 avant, 1 800 contre 50 à
+v = 20, soit environ 37 fois plus rapide. Tests inchangés et verts ; les 23 trouvés restent isomorphes à Seymour–Toft.
+
+Lancé avec cette version :
+- campagne GitHub Actions `anneal` (run 44547585180) : n = 5, 50 arêtes, v = 14 à 22, plusieurs réglages de bruit ;
+- en local, 2 h : n = 6 à 146 arêtes depuis le produit à 147 (`constructions/product147.txt`, 21 sommets), et
+  n = 5 à 50 arêtes pour v = 17 et 21.
