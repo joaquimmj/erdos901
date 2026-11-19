@@ -1302,3 +1302,10 @@
 [235s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1) proved=True
 [242s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1) proved=True
 [249s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1) proved=True
+[256s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1) proved=True
+[260s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1) proved=True
+[267s] n=6 cost 147 (ties; known 147) weights (3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1) proved=True
+[294s] n=6 cost 147 (ties; known 147) weights (3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1) proved=True
+[301s] n=6 cost 147 (ties; known 147) weights (3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1) proved=True
+[314s] n=6 cost 147 (ties; known 147) weights (3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1) proved=True
+[346s] n=6: all multisets of 11 weights done, best 147, unresolved 0

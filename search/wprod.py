@@ -34,7 +34,7 @@ def solve(n, u, target=None, tl=20):
     full = (1 << p) - 1
     A = ((sig[:, None] & S) == S) | (((sig[:, None] ^ full) & S) == S)
     if not A.any(axis=1).all(): return None, True, []
-    cons = [LinearConstraint(csr_matrix(A.astype(float)), lb=1, ub=np.inf)]
+    cons = [LinearConstraint(csr_matrix(A).astype(float), lb=1, ub=np.inf)]
     if target: cons.append(LinearConstraint(cost.reshape(1, -1), lb=0, ub=target))
     r = milp(cost, constraints=cons, integrality=np.ones(len(S)), bounds=Bounds(0, 1),
              options={"time_limit": tl, "disp": False})
