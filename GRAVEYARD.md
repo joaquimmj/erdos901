@@ -20,3 +20,5 @@
 | Solveur exact générique (OR-Tools CP-SAT) pour m(n, v) | borne 1 pour m(4, 8) après 300 s ; supprimé | historique git |
 | `search/lns.py` pour n = 5 | timeouts | `REPORT.md` |
 | Maître ILP de CEGAR à faible symétrie | 4 itérations en 25 min ; ne passe pas à l'échelle | `REPORT.md` |
+| Joints à un seul cœur (lot `batch` 44531901519) : n = 5 (\|W\| = 12), n = 6, n = 7 (\|W\| ≤ 13 en paires, r = 4, 5), n = 8 (r = 2 à 6) | tous infaisables sous le record, sauf 5 cas sans réponse dans le temps imparti (n5 w13, n6 r3 w13, n7 r2 w14/15, n8 r2 w14/15) | branche `results`, `batch_44531901519/SUMMARY.md` |
+| Fano + 11 sommets libres, n = 5, ≤ 50 (CEGAR) | infaisable ; + 12 et + 13 : pas de réponse en 5 h 15 | idem |

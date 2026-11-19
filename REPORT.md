@@ -374,19 +374,21 @@ Lancé avec cette version :
 - en local, 2 h : n = 6 à 146 arêtes depuis le produit à 147 (`constructions/product147.txt`, 21 sommets), et
   n = 5 à 50 arêtes pour v = 17 et 21.
 
-## Produits pondérés : cinq bornes sous les valeurs publiées (19/11, non relu, non annoncé)
+## Produits pondérés : bornes sous les valeurs publiées (19/11, non relu, non annoncé)
 
 **Famille.** Composantes C₁…C_p sur des sommets disjoints, C_i étant u_i-uniforme et non 2-coloriable avec m(u_i) arêtes (u_i = 1 : un sommet). On choisit une famille G de parties S de {1…p} de poids total au moins n ; les arêtes sont, pour chaque S, toutes les unions d'une arête de chaque C_i (i dans S), coupées à n sommets. Coût : somme sur S des produits des m(u_i). Si G est non 2-coloriable sur {1…p}, l'hypergraphe l'est aussi : chaque composante a une arête monochrome d'une certaine couleur, et une partie S monochrome pour ces couleurs donne une arête monochrome. Abbott–Moser, Abbott–Hanson–Toft, le multi-cœur et les blocs d'Aglave et al. sont des cas particuliers. `search/wprod.py` calcule le G optimal pour des poids donnés (ILP de couverture, HiGHS) ; il retrouve 23, 51, 147 et 1212.
 
 | n | Publié (Aglave et al.) | Ici | Poids des composantes |
 |---|---|---|---|
 | 8 | 1212 | **1163** | 5, 3, 3 et six sommets |
-| 11 | 25449 | **25425** | 6, 5, 5, 3 et huit sommets |
+| 11 | 25449 | **21568** | 5, 5, 3, 3, 3, 3 et deux sommets |
 | 13 | 200889 | **182064** | 8, 5, 5, 3 et six sommets |
-| 14 | 528218 | **436178** | 9, 5, 5, 3 et huit sommets |
-| 17 | 10375782 | **10217413** | 12, 5, 5, 5 et huit sommets |
+| 14 | 528218 | **426775** | 9, 5, 5, 3, 2 et sept sommets |
+| 17 | 10375782 | **10153304** | 9, 8, 6, 6, 5 et sept sommets |
+| 19 | aucune (69295337 par leurs récurrences) | **61059814** | 9, 9, 5, 5, 5, 5 et quatre sommets |
+| 22 | aucune (1605775675 par leurs récurrences) | **1395535872** | Abbott–Moser 3·m(11)² |
 
-Balayage : au plus 4 composantes de poids ≥ 2 et 8 sommets isolés (`results/wprod/chain_h4_o8.txt`). n = 5, 6, 7, 9, 10, 12, 15, 16 : pas d'amélioration dans cette plage. Les bornes pour n = 13, 14, 17 utilisent m(8) ≤ 1163.
+Balayages : jusqu'à 6 composantes de poids ≥ 2 et jusqu'à 10 sommets isolés ; lignes retenues dans `results/wprod/merged.txt`. n = 5, 6, 7, 9, 10, 12, 15, 16 : pas d'amélioration dans cette plage. Les bornes pour n = 13, 14, 17 utilisent m(8) ≤ 1163.
 
 **Vérification.** `verify/check_wprod.py` (code indépendant de l'optimiseur) refait, pour chaque ligne : poids de chaque partie ≥ n, non-2-colorabilité de G par énumération des 2^p colorations, coût. n = 8 : hypergraphe explicite `constructions/wprod1163.txt` (37 sommets), CaDiCaL + DRAT vérifié par drat-trim + Glucose, et preuve à la main. Pour n ≥ 11 il n'y a pas d'hypergraphe explicite certifié par SAT : la preuve est le lemme ci-dessus plus la vérification de G.
 
