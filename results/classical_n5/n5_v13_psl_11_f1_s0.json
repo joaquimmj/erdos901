@@ -1,0 +1,11 @@
+{
+ "n": 5,
+ "v": 13,
+ "group": "psl_11_f1",
+ "seed": 0,
+ "status": "infeasible_at_target",
+ "iterations": 1,
+ "constraints": 1716,
+ "seconds": 0.3,
+ "record": 51
+}

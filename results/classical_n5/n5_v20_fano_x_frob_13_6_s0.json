@@ -1,0 +1,11 @@
+{
+ "n": 5,
+ "v": 20,
+ "group": "fano_x_frob_13_6",
+ "seed": 0,
+ "status": "infeasible_at_target",
+ "iterations": 1,
+ "constraints": 57470,
+ "seconds": 10.7,
+ "record": 51
+}

@@ -1,0 +1,17 @@
+{
+ "n": 5,
+ "v": 17,
+ "group": "fano_f10",
+ "seed": 0,
+ "status": "optimal",
+ "iterations": 5,
+ "constraints": 8551,
+ "seconds": 145.8,
+ "record": 52,
+ "last_master_cost": 51,
+ "last_master_optimal": true,
+ "lower_bound_this_v": 51,
+ "edges": 51,
+ "beats_record": true,
+ "claim": "min edges of a fano_f10-invariant non-2-colourable 5-uniform hypergraph on 17 vertices = 51"
+}

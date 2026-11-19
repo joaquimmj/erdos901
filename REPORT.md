@@ -276,3 +276,51 @@ et « 51 moins une arête » un minimum local dont elle ne sort pas. Cela ne dit
 d'une autre forme : la recherche n'est pas exhaustive. À v = 15, l'état à 412 colorations testé n'est
 complétable par aucune arête unique ; les états à 369 de la campagne n'ont pas pu être examinés
 (artefacts non téléchargeables d'ici).
+
+## Constructions « jointes » : Abbott–Hanson généralisé, optimisé exactement (19 nov. 2026)
+
+`search/join.py`. On prend une base B, hypergraphe (n−r)-uniforme sans propriété B à c arêtes, et un ensemble W de
+sommets neufs. On choisit R (des r-parties de W) et F (des n-parties de W). Arêtes : e ∪ s pour e ∈ B et s ∈ R, plus F.
+Coût : c·|R| + |F|. Le tout est sans propriété B dès que, pour toute partie I de W, R a un élément dans I ou F a une
+arête monochrome. C'est un ILP de couverture, résolu exactement par HiGHS.
+
+Cette famille contient les deux records :
+- **n = 4 :** l'optimum à |W| = 8 avec base triangle est 23 = 3·4 + 11, trouvé en 5 s. Le témoin de Seymour–Toft est donc
+  « triangle + 4 paires + 11 arêtes », l'analogue pair d'Abbott–Hanson.
+- **n = 5 :** l'optimum à |W| = 10 avec base Fano est 51 = 7·5 + 16, trouvé et prouvé optimal en 22 s.
+
+Résultats (« infaisable » = prouvé par l'ILP qu'aucune construction de la famille ne fait mieux que le record) :
+
+| n | base (r) | \|W\| | résultat |
+|---|---|---|---|
+| 5 | Fano (r = 2) | 8, 9, 10 | optimum 67, 66, 51 |
+| 5 | Fano (r = 2) | 11 | infaisable à ≤ 50 |
+| 5 | Fano (r = 2) | 12 | pas de réponse en 40 min |
+| 5 | triangle (r = 3) | 7, 8 | optimum 126, 96 |
+| 5 | triangle (r = 3) | 9, 10, 11 | infaisable à ≤ 50 |
+| 6 | triangle (r = 4), Fano (r = 3), Seymour–Toft (r = 2) | 8 à 12 (8 à 10 pour r = 2) | infaisable à ≤ 146 |
+| 7 | Fano (r = 4) | 10 à 13 | infaisable à ≤ 420 |
+
+Non fait : n = 7 avec base le 51 et des paires (|W| = 14, la forme d'Abbott–Hanson elle-même).
+Réserve : ces preuves reposent sur HiGHS seul, sans certificat indépendant.
+
+## Groupes classiques pour n = 5 (19 nov. 2026)
+
+`groups/gen.py` engendre Z_p ⋊ Z_d (dont AGL(1,p)), PSL(2,p) sur p + 1 points, leurs versions avec 1 ou 2 points
+fixes, et des produits avec le groupe de Fano. 48 groupes, v = 11 à 21, cible ≤ 50 arêtes (`results/classical_n5/`).
+
+- **47 groupes : infaisable à ≤ 50**, en moins de 30 s chacun sauf un. Les groupes transitifs (Frobenius, PSL) ont des
+  orbites trop grosses : avec 50 arêtes on ne peut prendre que 2 ou 3 orbites.
+- **Symétrie de Fano sur 7 points, 10 autres sommets libres (v = 17, 693 orbites, tous les profils d'arêtes permis) :
+  le minimum est exactement 51** (optimum prouvé en 146 s ; ≤ 50 prouvé infaisable en 318 s).
+  Même conclusion (infaisable à ≤ 50) pour 8 et 9 sommets libres.
+- Fano + 11 sommets libres (v = 18) : pas de réponse en 15 min, relancé pour 2 h avec Fano + 12.
+
+Lecture : tout hypergraphe à 50 arêtes sur au plus 17 sommets devrait renoncer à la symétrie de Fano sur 7 sommets.
+Avec la recherche locale qui retombe sur le 51, cela fait deux indices indépendants que 51 est difficile à battre à
+17 sommets ou moins ; ce n'est pas une preuve de m(5) = 51.
+
+## Bornes supérieures de m(5, v)
+
+`search/descend.sh` baisse K tant que la recherche locale réussit. Campagne GitHub Actions `mnv`
+(run 44524361427, v = 10 à 18, 4 graines, 5 h 30) en cours ; v = 10, 11 et 17 servent de calibrage (126, 66, 51 attendus).

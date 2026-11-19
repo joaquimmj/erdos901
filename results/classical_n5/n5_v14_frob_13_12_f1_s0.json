@@ -1,0 +1,11 @@
+{
+ "n": 5,
+ "v": 14,
+ "group": "frob_13_12_f1",
+ "seed": 0,
+ "status": "infeasible_at_target",
+ "iterations": 1,
+ "constraints": 4719,
+ "seconds": 0.4,
+ "record": 51
+}

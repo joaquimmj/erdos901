@@ -1,0 +1,2 @@
+n=6 r=2 base=23 edges, |W|=8, columns=56, rows=256
+infeasible (proved)
