@@ -1,0 +1,2 @@
+[    0.0s] n=5 v=18 group=fano_f11 orbits=1090 n-sets=8568
+[ 1057.0s] {"n": 5, "v": 18, "group": "fano_f11", "seed": 0, "status": "infeasible_at_target", "iterations": 10, "constraints": 14313, "seconds": 1057.0, "record": 51, "last_master_cost": 50, "last_master_optimal": true, "lower_bound_this_v": 50}

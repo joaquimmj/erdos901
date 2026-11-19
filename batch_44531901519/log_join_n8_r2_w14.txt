@@ -1,0 +1,2 @@
+n=8 r=2 base=147 edges, |W|=14, columns=3094, rows=16384
+no solution within the time limit

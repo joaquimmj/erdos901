@@ -1,0 +1,3 @@
+[    0.0s] n=5 v=19 group=fano_f12 orbits=1664 n-sets=11628
+[15079.5s] it=10 rows=15426 master_cost=50 optimal=False
+[19000.3s] {"n": 5, "v": 19, "group": "fano_f12", "seed": 0, "status": "master_no_incumbent", "iterations": 13, "constraints": 17423, "seconds": 19000.3, "record": 51, "last_master_cost": 50, "last_master_optimal": false, "lower_bound_this_v": null}

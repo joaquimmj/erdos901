@@ -1,0 +1,2 @@
+n=7 r=5 base=3 edges, |W|=13, columns=3003, rows=8192
+infeasible (proved)

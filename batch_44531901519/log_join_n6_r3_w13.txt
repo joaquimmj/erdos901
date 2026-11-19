@@ -1,0 +1,2 @@
+n=6 r=3 base=7 edges, |W|=13, columns=2002, rows=8192
+no solution within the time limit
