@@ -247,3 +247,32 @@ hypergraphe à 51 arêtes depuis un départ aléatoire (non comparé au 51 connu
 **Campagne longue lancée le 19 novembre** (workflow `anneal.yml`, déclenché par une branche `run/...`) : n = 5,
 K = 50, v = 13 à 20, 20 machines × 4 graines, environ 5 h 30 chacune. Quatre machines partent du 51. Tout succès
 est certifié et écrit sur la branche `results`.
+
+## Campagne de nuit du 19 nov. 2026 (n = 5, 50 arêtes)
+
+Run GitHub Actions `44473660998` : 88 recherches de 5 h 30 (v = 13 à 20), plus 12 recherches locales de 2 h.
+**Aucun hypergraphe à 50 arêtes trouvé.** Détail : branche `results`, `anneal_44473660998/SUMMARY.md`
+(copie dans `results/night_local/`).
+
+| v | Départ | Meilleur nombre de 2-colorations propres restantes |
+|---|---|---|
+| 13 | aléatoire | 261 |
+| 14 | aléatoire | 375 (281 en local) |
+| 15 | aléatoire | 353 ; 369 atteint par 6 graines sur 8 |
+| 16 | aléatoire | 673 |
+| 17 | aléatoire | 325, atteint par 5 graines sur 8 |
+| 17 | le 51 moins une arête | 325, jamais amélioré (8 graines) |
+| 18, 19 | le 51 moins une arête | 650, 1300 (= 325 × 2, × 4 : sommets libres) |
+| 18, 19, 20 | aléatoire | environ 4 000, 7 700, 14 400 |
+
+Observation : à v = 17, la recherche partie du hasard retombe sur le 51 connu privé d'une arête.
+Vérifié sur une graine locale (`state_n5_v17_K50_s200.txt`) : une seule arête complète l'état en un
+hypergraphe non 2-coloriable à 51 arêtes, 15-régulier, avec 322 560 automorphismes et des orbites de
+sommets 10 + 7, comme la construction d'Abbott–Hanson–Toft. L'isomorphisme n'est pas prouvé formellement
+(mêmes invariants seulement).
+
+Lecture (interprétation, pas un résultat) : le 51 est un attracteur très fort de cette recherche à v = 17,
+et « 51 moins une arête » un minimum local dont elle ne sort pas. Cela ne dit rien sur l'existence d'un 50
+d'une autre forme : la recherche n'est pas exhaustive. À v = 15, l'état à 412 colorations testé n'est
+complétable par aucune arête unique ; les états à 369 de la campagne n'ont pas pu être examinés
+(artefacts non téléchargeables d'ici).
