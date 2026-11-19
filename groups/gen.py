@@ -38,7 +38,7 @@ if __name__ == "__main__":
             for k in (1, 2):
                 G[f"{name}_f{k}"] = pad(G[name], k)
     G["psl_7"] = psl(7)
-    for k in (8, 9, 10, 11):
+    for k in (8, 9, 10, 11, 12, 13):
         G[f"fano_f{k}"] = pad(fano, k)
     for p, d in ((11, 10), (11, 5), (13, 12), (13, 6)):
         G[f"fano_x_frob_{p}_{d}"] = prod(fano, frob(p, d))

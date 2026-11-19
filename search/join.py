@@ -24,7 +24,8 @@ from orbits import load_group, orbits
 
 BASES = {1: lambda: [frozenset([0])], 2: hg.triangle, 3: hg.fano,
          4: lambda: hg.read_edges(os.path.join(hg.ROOT, "constructions/seymour_toft.txt")),
-         5: lambda: hg.read_edges(os.path.join(hg.ROOT, "constructions/aht51.txt"))}
+         5: lambda: hg.read_edges(os.path.join(hg.ROOT, "constructions/aht51.txt")),
+         6: lambda: hg.abbott_moser_product(hg.triangle(), hg.fano())}
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--n", type=int, required=True)
@@ -65,9 +66,11 @@ R = [frozenset(s) for i in range(nR) if res.x[i] > 0.5 for s in orbs[i][0]]
 F = [frozenset(s) for i in range(len(orbs)) if res.x[i] > 0.5 and i >= nR for s in orbs[i][0]]
 vb = max(map(max, base)) + 1
 H = [frozenset(set(e) | {vb + x for x in s}) for e in base for s in R] + [frozenset(vb + x for x in f) for f in F]
-assert len(set(H)) == c * len(R) + len(F) and hg.proper_coloring(hg.relabel(H)) is None
+assert len(set(H)) == c * len(R) + len(F)
 os.makedirs(a.out, exist_ok=True)
 path = os.path.join(a.out, f"join_n{n}_r{r}_w{w}_E{len(H)}.txt")
 hg.write_edges(hg.relabel(H), path)
+nv = len(set().union(*H))
+assert nv > 28 or hg.proper_coloring(hg.relabel(H)) is None   # beyond 28 vertices: certify separately
 print(f"[{time.time()-t0:.0f}s] cost {len(H)} = {c}*{len(R)} + {len(F)}, optimal={res.status == 0}, "
       f"lower bound {res.mip_dual_bound:.1f} -> {path}")

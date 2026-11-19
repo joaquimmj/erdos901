@@ -1,0 +1,76 @@
+name: batch
+# Runs a list of long commands in parallel (push a branch batch/...). Logs and result files go to the `results` branch.
+on:
+  push:
+    branches: ["batch/**"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        include:
+          - { name: join_n7_r2_w11, cmd: "python3 search/join.py --n 7 --r 2 --w 11 --target 420 --time 19000 --out out" }
+          - { name: join_n7_r2_w12, cmd: "python3 search/join.py --n 7 --r 2 --w 12 --target 420 --time 19000 --out out" }
+          - { name: join_n7_r2_w13, cmd: "python3 search/join.py --n 7 --r 2 --w 13 --target 420 --time 19000 --out out" }
+          - { name: join_n7_r2_w14, cmd: "python3 search/join.py --n 7 --r 2 --w 14 --target 420 --time 19000 --out out" }
+          - { name: join_n7_r2_w15, cmd: "python3 search/join.py --n 7 --r 2 --w 15 --target 420 --time 19000 --out out" }
+          - { name: join_n5_r2_w12, cmd: "python3 search/join.py --n 5 --r 2 --w 12 --target 50 --time 19000 --out out" }
+          - { name: join_n5_r2_w13, cmd: "python3 search/join.py --n 5 --r 2 --w 13 --target 50 --time 19000 --out out" }
+          - { name: join_n5_r3_w12, cmd: "python3 search/join.py --n 5 --r 3 --w 12 --target 50 --time 19000 --out out" }
+          - { name: join_n7_r4_w14, cmd: "python3 search/join.py --n 7 --r 4 --w 14 --target 420 --time 19000 --out out" }
+          - { name: join_n7_r5_w11, cmd: "python3 search/join.py --n 7 --r 5 --w 11 --target 420 --time 19000 --out out" }
+          - { name: join_n7_r5_w12, cmd: "python3 search/join.py --n 7 --r 5 --w 12 --target 420 --time 19000 --out out" }
+          - { name: join_n7_r5_w13, cmd: "python3 search/join.py --n 7 --r 5 --w 13 --target 420 --time 19000 --out out" }
+          - { name: join_n6_r2_w11, cmd: "python3 search/join.py --n 6 --r 2 --w 11 --target 146 --time 19000 --out out" }
+          - { name: join_n6_r2_w12, cmd: "python3 search/join.py --n 6 --r 2 --w 12 --target 146 --time 19000 --out out" }
+          - { name: join_n6_r3_w13, cmd: "python3 search/join.py --n 6 --r 3 --w 13 --target 146 --time 19000 --out out" }
+          - { name: join_n6_r4_w13, cmd: "python3 search/join.py --n 6 --r 4 --w 13 --target 146 --time 19000 --out out" }
+          - { name: join_n8_r2_w12, cmd: "python3 search/join.py --n 8 --r 2 --w 12 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r2_w13, cmd: "python3 search/join.py --n 8 --r 2 --w 13 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r2_w14, cmd: "python3 search/join.py --n 8 --r 2 --w 14 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r2_w15, cmd: "python3 search/join.py --n 8 --r 2 --w 15 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r4_w12, cmd: "python3 search/join.py --n 8 --r 4 --w 12 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r4_w13, cmd: "python3 search/join.py --n 8 --r 4 --w 13 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r4_w14, cmd: "python3 search/join.py --n 8 --r 4 --w 14 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r5_w12, cmd: "python3 search/join.py --n 8 --r 5 --w 12 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r6_w12, cmd: "python3 search/join.py --n 8 --r 6 --w 12 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r5_w13, cmd: "python3 search/join.py --n 8 --r 5 --w 13 --target 1211 --time 19000 --out out" }
+          - { name: join_n8_r6_w13, cmd: "python3 search/join.py --n 8 --r 6 --w 13 --target 1211 --time 19000 --out out" }
+          - { name: cegar_fano_f11, cmd: "python3 groups/gen.py out/g && python3 search/cegar.py --n 5 --v 18 --group-file out/g/fano_f11.json --record 51 --time 19000 --iter-time 1800 --out out" }
+          - { name: cegar_fano_f12, cmd: "python3 groups/gen.py out/g && python3 search/cegar.py --n 5 --v 19 --group-file out/g/fano_f12.json --record 51 --time 19000 --iter-time 1800 --out out" }
+          - { name: cegar_fano_f13, cmd: "python3 groups/gen.py out/g && python3 search/cegar.py --n 5 --v 20 --group-file out/g/fano_f13.json --record 51 --time 19000 --iter-time 1800 --out out" }
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install numpy scipy python-sat && make
+      - name: run
+        run: |
+          mkdir -p out
+          ${{ matrix.cmd }} > out/log_${{ matrix.name }}.txt 2>&1 || true
+          rm -rf out/g; tail -n 3 out/log_${{ matrix.name }}.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "batch-${{ matrix.name }}", path: out/, retention-days: 30 }
+  collect:
+    needs: run
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { path: art }
+      - name: commit results (results branch)
+        run: |
+          RUN=batch_${{ github.run_id }}
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin results:results && git worktree add /tmp/rb results
+          mkdir -p /tmp/rb/$RUN && find art -type f -size -2000k -exec cp {} /tmp/rb/$RUN/ \;
+          { echo "| job | last line |"; echo "|---|---|"
+            for f in $(ls /tmp/rb/$RUN/log_*.txt | sort); do echo "| $(basename $f .txt) | $(tail -n 1 $f | cut -c1-200) |"; done
+          } | tee /tmp/rb/$RUN/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"
+          cd /tmp/rb && git add -A && git commit -q -m "results: batch run ${{ github.run_id }}" && git push origin results
