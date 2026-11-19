@@ -14,17 +14,19 @@ jobs:
       fail-fast: false
       max-parallel: 20
       matrix:
-        v: [13, 14, 15, 16, 17, 18, 19, 20]
+        v: [14, 15, 16, 17, 18, 19, 20, 21, 22]
         seed: [0, 1]
         start: [""]
         include:
-          - { v: 17, seed: 2, start: "--start constructions/aht51.txt" }
-          - { v: 17, seed: 3, start: "--start constructions/aht51.txt --noise 1" }
-          - { v: 18, seed: 2, start: "--start constructions/aht51.txt" }
-          - { v: 19, seed: 2, start: "--start constructions/aht51.txt" }
+          - { v: 17, seed: 2, start: "--noise 0.5" }
+          - { v: 17, seed: 3, start: "--noise 5 --cands 32" }
+          - { v: 18, seed: 2, start: "--noise 0.5" }
+          - { v: 18, seed: 3, start: "--noise 5 --cands 32" }
+          - { v: 16, seed: 2, start: "--noise 5 --cands 32" }
+          - { v: 19, seed: 2, start: "--noise 5 --cands 32" }
     steps:
       - uses: actions/checkout@v4
-      - run: pip install numpy
+      - run: pip install numpy numba
       - name: anneal
         run: |
           mkdir -p out
@@ -65,6 +67,7 @@ jobs:
           { echo "| log | last line |"; echo "|---|---|"
             for f in $(find art -name 'log_*.txt' | sort); do echo "| $(basename $f) | $(tail -n 1 $f) |"; done
           } | tee "$RUN/SUMMARY.md" >> "$GITHUB_STEP_SUMMARY"
+          find art \( -name 'state_*' -o -name 'anneal_*_E*.txt' \) -exec cp {} "$RUN/" \;
           for f in $(find art -name 'anneal_*_E*.txt'); do
             echo "!!! certifying $f" | tee -a "$RUN/SUMMARY.md"
             bash verify/certify.sh "$f" "$RUN/cert_$(basename $f .txt)" | tee -a "$RUN/SUMMARY.md"

@@ -14,6 +14,7 @@ sample colourings and confirm with the SAT oracle.
 Usage: python3 search/anneal.py --n 4 --v 11 --edges 23 --time 600 --out out/anneal
 """
 import argparse, os, sys, time
+import numba
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from hg import read_edges, write_edges
@@ -32,8 +33,7 @@ a = ap.parse_args()
 n, v, K = a.n, a.v, a.edges
 assert 2 * n - 1 <= v <= 26
 rng = np.random.default_rng(a.seed)
-C = np.arange(1 << (v - 1), dtype=np.uint32)
-full = (1 << v) - 1
+C = np.arange(1 << (v - 1), dtype=np.uint32)   # bit x = 1: vertex x red; vertex v-1 always blue
 
 
 def mono(m):
@@ -45,45 +45,123 @@ def rand_edge(pool):
     return sum(1 << int(x) for x in rng.choice(pool, size=n, replace=False))
 
 
+@numba.njit(cache=True)
+def touch(E, cover, uniq, K, j, d, v):
+    """Add (d=1) or remove (d=-1) the edge in slot j.  Keeps cover[c] (edges
+    monochromatic under c) and uniq[i] (colourings covered by edge i alone).
+    Returns the change in the number of uncovered colourings."""
+    m = E[j]; full = (1 << (v - 1)) - 1; comp = full & ~m; nb = 0
+    for base in (0, m):                    # all blue, then all red
+        if base and m >> (v - 1):
+            break                          # the top vertex is blue: no all-red colouring
+        s = comp
+        while True:
+            c = base | s
+            cover[c] += d
+            k = cover[c]
+            if d == 1 and k == 1:
+                uniq[j] += 1; nb -= 1
+            elif d == -1 and k == 0:
+                uniq[j] -= 1; nb += 1
+            elif k == (3 + d) // 2:        # c now has two owners (add) or one (remove): fix the other owner
+                for i in range(K + 1):
+                    if i != j and E[i] >= 0 and ((c & E[i]) == 0 or (c & E[i]) == E[i]):
+                        uniq[i] -= d
+                        break
+            if s == 0:
+                break
+            s = (s - 1) & comp
+    return nb
+
+
+@numba.njit(cache=True)
+def run(E, cover, uniq, K, n, v, cands, noise, iters, seed, nbad):
+    """iters moves; E has K+1 slots, the last one free (-1)."""
+    if seed >= 0:
+        np.random.seed(seed)
+    full = (1 << (v - 1)) - 1
+    best = nbad; Ebest = E[:K].copy(); pick = np.zeros(v, np.int64)
+    for it in range(iters):
+        if nbad == 0:
+            break
+        c = np.random.randint(full + 1)
+        while cover[c] != 0:
+            c = (c + 1) & full
+        bm = -1; bg = -1
+        for _ in range(cands):
+            red = np.random.randint(2)
+            k = 0
+            for x in np.random.permutation(v):
+                if (c >> x) & 1 == red:
+                    pick[k] = x; k += 1
+            if k < n:
+                continue
+            m = 0
+            for i in range(n):
+                m |= 1 << pick[i]
+            dup = False
+            for i in range(K):
+                dup |= E[i] == m
+            if dup:
+                continue
+            g = 0; comp = full & ~m
+            for base in (0, m):
+                if base and m >> (v - 1):
+                    break
+                s = comp
+                while True:
+                    g += cover[base | s] == 0
+                    if s == 0:
+                        break
+                    s = (s - 1) & comp
+            if g > bg:
+                bg = g; bm = m
+        if bm < 0:
+            continue
+        E[K] = bm
+        nbad += touch(E, cover, uniq, K, K, 1, v)
+        j = 0; lo = 1e18; sq = noise * np.sqrt(nbad + 1.0)
+        for i in range(K):
+            l = uniq[i] + sq * np.random.random()
+            if l < lo:
+                lo = l; j = i
+        nbad += touch(E, cover, uniq, K, j, -1, v)
+        E[j] = bm; uniq[j] = uniq[K]; uniq[K] = 0; E[K] = -1
+        if nbad < best:
+            best = nbad; Ebest = E[:K].copy()
+    return nbad, best, Ebest
+
+
 E = [sum(1 << x for x in e) for e in read_edges(a.start)][:K] if a.start else []
 while len(E) < K:
     m = rand_edge(np.arange(v))
     if m not in E:
         E.append(m)
-M = np.array([mono(m) for m in E])          # K x 2^(v-1) booleans
-cover = M.sum(axis=0, dtype=np.int32)
-best, t0, it = None, time.time(), 0
+E = np.array(E + [-1], dtype=np.int64)
+cover = np.zeros(1 << (v - 1), np.int32); uniq = np.zeros(K + 1, np.int64)
+saveE = E.copy(); E[:K] = -1
+nbad = len(cover)
+for j in range(K):
+    E[j] = saveE[j]; nbad += touch(E, cover, uniq, K, j, 1, v)
+assert nbad == int((cover == 0).sum()) == int((sum(mono(int(m)).astype(np.int32) for m in E[:K]) == 0).sum())
+best, t0, it = nbad, time.time(), 0
 os.makedirs(a.out, exist_ok=True)
 state = os.path.join(a.out, f"state_n{n}_v{v}_K{K}_s{a.seed}.txt")   # best state so far, usable as --start
-saved, Ebest = t0, list(E)
-unmask = lambda ms: [[x for x in range(v) if m >> x & 1] for m in ms]
-while time.time() - t0 < a.time:
-    it += 1
-    bad = np.flatnonzero(cover == 0)
-    if best is None or len(bad) < best:
-        best, Ebest = len(bad), list(E)
+saved, Ebest, chunk = t0, E[:K].copy(), 200
+unmask = lambda ms: [[x for x in range(v) if int(m) >> x & 1] for m in ms]
+print(f"[{0.0:7.1f}s] it=0 proper colourings: {best}", flush=True)
+while time.time() - t0 < a.time and nbad:
+    t1 = time.time()
+    nbad, b, Eb = run(E, cover, uniq, K, n, v, a.cands, a.noise, chunk, a.seed if it == 0 else -1, nbad)
+    it += chunk
+    chunk = max(50, min(10**6, int(chunk * 5 / (time.time() - t1 + 1e-3))))   # about 5 s per call
+    if b < best:
+        best, Ebest = b, Eb
         print(f"[{time.time()-t0:7.1f}s] it={it} proper colourings: {best}", flush=True)
-    if len(bad) == 0:
-        break
     if time.time() - saved > 600:
         saved = time.time()
         write_edges(unmask(Ebest), state)
-    c = int(rng.choice(bad))
-    red = [x for x in range(v) if c >> x & 1]
-    blue = [x for x in range(v) if not c >> x & 1]
-    pools = [p for p in (red, blue) if len(p) >= n]
-    cand = {rand_edge(pools[rng.integers(len(pools))]) for _ in range(a.cands)} - set(E)
-    if not cand:
-        continue
-    gains = {m: int(mono(m)[bad].sum()) for m in cand}
-    m = max(gains, key=gains.get)
-    row = mono(m)
-    cover += row
-    loss = (M & (cover == 1)).sum(axis=1) + a.noise * rng.random(K) * np.sqrt(len(bad))
-    j = int(np.argmin(loss))
-    cover -= M[j]
-    M[j], E[j] = row, m
-
+E = [int(m) for m in (E[:K] if nbad == 0 else Ebest)]; best = min(best, nbad)
 write_edges(unmask(Ebest), state)
 edges = unmask(E)
 if best == 0:

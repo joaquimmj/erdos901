@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - run: pip install numpy scipy python-sat
+      - run: pip install numpy scipy python-sat numba
       - run: make test
       - run: python3 verify/check_pysat.py constructions/seymour_toft.txt
       - name: CEGAR sanity (must rediscover Fano, m(3)=7)

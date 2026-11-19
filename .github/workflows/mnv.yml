@@ -25,7 +25,7 @@ jobs:
           - { v: 18, k0: 80 }
     steps:
       - uses: actions/checkout@v4
-      - run: pip install numpy
+      - run: pip install numpy numba
       - name: descend
         run: |
           for s in 0 1 2 3; do
