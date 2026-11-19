@@ -4,9 +4,9 @@ m(5,13) <= 65 (seed 7)
 m(5,14) <= 65 (seed 7)
 m(5,15) <= 61 (seed 7)
 m(5,16) <= 57 (seed 7)
-python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
-python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
-python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
-python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
-python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
-python3: can't open file '/home/user/erdos901/verify/check2col.py': [Errno 2] No such file or directory
+results/night_local/mnv_fast/anneal_n5_v11_s7_E66.txt: NON-2-COLORABLE v=11 E=66 n=5
+results/night_local/mnv_fast/anneal_n5_v12_s7_E66.txt: NON-2-COLORABLE v=12 E=66 n=5
+results/night_local/mnv_fast/anneal_n5_v13_s7_E65.txt: NON-2-COLORABLE v=13 E=65 n=5
+results/night_local/mnv_fast/anneal_n5_v14_s7_E65.txt: NON-2-COLORABLE v=14 E=65 n=5
+results/night_local/mnv_fast/anneal_n5_v15_s7_E61.txt: NON-2-COLORABLE v=15 E=61 n=5
+results/night_local/mnv_fast/anneal_n5_v16_s7_E57.txt: NON-2-COLORABLE v=16 E=57 n=5

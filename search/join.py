@@ -31,13 +31,14 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--n", type=int, required=True)
 ap.add_argument("--r", type=int, required=True, help="size of the part taken in W")
 ap.add_argument("--w", type=int, required=True, help="|W|")
+ap.add_argument("--c", type=int, help="edge count of the base, when the base itself is not needed (any n)")
 ap.add_argument("--group-file", help="group on W: R and F are unions of its orbits")
 ap.add_argument("--target", type=int, help="only accept cost <= target")
 ap.add_argument("--time", type=float, default=600)
 ap.add_argument("--out", default="out/join")
 a = ap.parse_args()
 n, r, w = a.n, a.r, a.w
-base = BASES[n - r](); c = len(base)
+base = None if a.c else BASES[n - r](); c = a.c or len(base)
 gens = load_group(a.group_file)[1] if a.group_file else []
 I = np.arange(1 << w, dtype=np.uint32)
 cols, cost = [], []          # one boolean column over all I per orbit
@@ -64,10 +65,18 @@ if res.x is None:
 nR = len(orbits(w, r, gens))
 R = [frozenset(s) for i in range(nR) if res.x[i] > 0.5 for s in orbs[i][0]]
 F = [frozenset(s) for i in range(len(orbs)) if res.x[i] > 0.5 and i >= nR for s in orbs[i][0]]
+os.makedirs(a.out, exist_ok=True)
+if base is None:      # description only: the pairs R and the edges F inside W
+    path = os.path.join(a.out, f"join_n{n}_r{r}_w{w}_c{c}_E{c * len(R) + len(F)}.txt")
+    with open(path, "w") as f:
+        f.write(f"# n={n} base {n-r}-uniform with {c} edges; R={len(R)} F={len(F)}\n")
+        f.writelines("R " + " ".join(map(str, sorted(s))) + "\n" for s in R)
+        f.writelines("F " + " ".join(map(str, sorted(s))) + "\n" for s in F)
+    print(f"[{time.time()-t0:.0f}s] cost {c * len(R) + len(F)} = {c}*{len(R)} + {len(F)}, optimal={res.status == 0}, "
+          f"lower bound {res.mip_dual_bound:.1f} -> {path}"); sys.exit(0)
 vb = max(map(max, base)) + 1
 H = [frozenset(set(e) | {vb + x for x in s}) for e in base for s in R] + [frozenset(vb + x for x in f) for f in F]
 assert len(set(H)) == c * len(R) + len(F)
-os.makedirs(a.out, exist_ok=True)
 path = os.path.join(a.out, f"join_n{n}_r{r}_w{w}_E{len(H)}.txt")
 hg.write_edges(hg.relabel(H), path)
 nv = len(set().union(*H))
