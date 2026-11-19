@@ -1,0 +1,1 @@
+[    0.0s] it=0 proper colourings: 1600

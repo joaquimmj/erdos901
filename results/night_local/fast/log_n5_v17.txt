@@ -1,0 +1,12 @@
+[    0.0s] it=0 proper colourings: 7676
+[    0.0s] it=200 proper colourings: 3138
+[    4.2s] it=44257 proper colourings: 2523
+[    9.2s] it=97438 proper colourings: 2500
+[   14.1s] it=150296 proper colourings: 2470
+[  119.2s] it=1279897 proper colourings: 2438
+[  379.1s] it=4067151 proper colourings: 2403
+[  534.0s] it=5750411 proper colourings: 2362
+[  809.2s] it=8727913 proper colourings: 2255
+[  899.1s] it=9691699 proper colourings: 2222
+[ 3694.5s] it=39825261 proper colourings: 2172
+no success: best had 2172 proper colourings after 75472719 moves
